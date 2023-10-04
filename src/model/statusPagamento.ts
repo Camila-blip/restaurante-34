@@ -1,5 +1,7 @@
 enum StatusPagamento{
     APROVADO = "Aprovado",
-    REPROVADO = "Reprovado",
+    CANCELADO = "Cancelado",
+    AGUARDANDO_PAGAMENTO = "Aguardando pagamento",
+    FALHA_NO_PAGAMENTO = "Falha no pagamento",
 
 }

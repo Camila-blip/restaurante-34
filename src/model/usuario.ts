@@ -1,7 +1,7 @@
 class Usuario {
     constructor(
         public id: number,
-        public tipoAcesso: string,
+        public tipoAcesso: TipoAcesso,
         public login: string,
         public senha: string
     ) {}
