@@ -9,7 +9,7 @@ class ClienteInMemoryRepository implements ClienteRepository {
         return cliente;
     }
 
-    async get(id: string): Promise<boolean> {
+    async get(id: number): Promise<boolean> {
         const index = this.clientes.findIndex((c) => c.id === id);
         if (index !== -1) {
             this.clientes.splice(index, 1);

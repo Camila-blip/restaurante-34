@@ -1,8 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import http from "http";
-import "./database";
-import routes from "./infrastructure/web/routes";
+import "./infrastructure/database";
 import bodyParser from "body-parser";
 import cors from "cors";
 
@@ -13,8 +12,6 @@ app.use(express.json());
 app.use(cors());
 
 const server = http.createServer(app);
-
-routes(app);
 
 server.listen(process.env.PORT || 3001, () => {
     console.log(`RUNNING ON PORT ${process.env.PORT || 3001}`);

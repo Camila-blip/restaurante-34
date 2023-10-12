@@ -1,6 +1,8 @@
 // ClienteRepository.ts (interface)
 
+import { Cliente } from "../model/cliente";
+
 export interface ClienteRepository {
     create(cliente: Cliente): Promise<Cliente>;
-    get(id: string): Promise<boolean>;
+    get(id: number): Promise<boolean>;
 }
