@@ -1,36 +1,31 @@
 version: '3.5'
 
 services:
+  prisma-migrate:
+    container_name: prisma-migrate
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      DB_HOST: "postgresql://root:root@localhost:5438/mydb?schema=public"
+    depends_on:
+      - postgres
+
   postgres:
     container_name: postgres_container
-    build:
-      context: prisma
-      dockerfile: Dockerfile
     image: postgres
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: "1234"
+      POSTGRES_HOST: localhost
+      POSTGRES_DB: postgres
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
       PGDATA: /data/postgres
     volumes:
        - postgres:/data/postgres
     ports:
-      - "5432:5432"
-    networks:
-      - postgres
-    restart: unless-stopped
-  
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-       - pgadmin:/var/lib/pgadmin
-
-    ports:
-      - "${PGADMIN_PORT:-5050}:80"
+      - 5438:5432
     networks:
       - postgres
     restart: unless-stopped
@@ -41,4 +36,3 @@ networks:
 
 volumes:
     postgres:
-    pgadmin:
