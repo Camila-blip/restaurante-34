@@ -1,9 +1,12 @@
 import express from "express";
-import ClienteController from "../controllers/cliente.controller";
+import ClienteController from "@/adapters/controllers/cliente.controller";
+import { prisma } from "@/adapters/Driven/infrastructure/database";
+import ClienteRepository from "@/adapters/Driver/ClienteRepository";
 
-const Controller = new ClienteController();
+const clienteRepository = new ClienteRepository(prisma);
+const clienteController = new ClienteController(clienteRepository);
 
 export default express()
-    .get("/:cpf/", Controller.getCliente)
+    .get("/cliente/:cpf/", clienteController.getCliente)
 
-    .post("/", Controller.createCliente);
+    .post("/cliente", clienteController.createCliente);
