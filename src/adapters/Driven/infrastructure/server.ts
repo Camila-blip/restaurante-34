@@ -4,15 +4,27 @@ import http from "http";
 import "./database";
 import bodyParser from "body-parser";
 import cors from "cors";
+import clienteRoutes from "@/adapters/Driven/infrastructure/routes/cliente.routes";
 
-const app = express();
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json());
-app.use(cors());
 
-const server = http.createServer(app);
+try{
+  const app = express();
+  const cliente = new clienteRoutes(app);
 
-server.listen(process.env.PORT || 3001, () => {
+  cliente.buildRoutes();
+  
+  app.use(bodyParser.json({ limit: "50mb" }));
+  app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+  app.use(express.json());
+  app.use(cors());
+  
+  const server = http.createServer(app);
+  
+  server.listen(process.env.PORT || 3001, () => {
     console.log(`RUNNING ON PORT ${process.env.PORT || 3001}`);
-});
+  });
+  
+}
+catch(err){
+console.log(err);
+}
