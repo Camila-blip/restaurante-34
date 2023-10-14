@@ -18,12 +18,11 @@ export default class ClienteController {
             };
 
             // Chame o método create do caso de uso
-            const clienteCriado = await this.clienteRepository.create(
-                novoCliente
-            );
+            const clienteCriado = await this.clienteRepository.get(cpf);
 
             return res.status(400).json({ message: "Sucesso get cliente" });
         } catch (error) {
+            console.log("eroor", error);
             return res.status(400).json({ message: "Error get Cliente" });
         }
     }

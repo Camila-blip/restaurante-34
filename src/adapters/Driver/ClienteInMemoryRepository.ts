@@ -1,20 +1,14 @@
 import { ClienteRepository } from "@/domain/repositories/ClienteRepository";
 import { Cliente } from "@/domain/model/cliente";
 
-class ClienteInMemoryRepository implements ClienteRepository {
-    private clientes: Cliente[] = [];
-
+export class ClienteInMemoryRepository implements ClienteRepository {
     async create(cliente: Cliente): Promise<Cliente> {
-        this.clientes.push(cliente);
+        console.log("aquinocreate");
         return cliente;
     }
 
-    async get(id: number): Promise<boolean> {
-        const index = this.clientes.findIndex((c) => c.id === id);
-        if (index !== -1) {
-            this.clientes.splice(index, 1);
-            return true;
-        }
+    async get(cpf: number): Promise<boolean> {
+        console.log("aquinoget");
         return false;
     }
 }
