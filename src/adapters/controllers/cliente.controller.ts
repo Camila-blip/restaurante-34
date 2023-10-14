@@ -17,7 +17,7 @@ export default class ClienteController {
                 data,
             };
 
-            // Chame o método create do repositório
+            // Chame o método create do caso de uso
             const clienteCriado = await this.clienteRepository.create(
                 novoCliente
             );
