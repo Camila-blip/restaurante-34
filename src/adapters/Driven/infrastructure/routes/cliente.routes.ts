@@ -1,4 +1,4 @@
-import express from "express";
+import { IClienteRoutes } from "@/adapters/Driven/infrastructure/routes/IClienteRoutes";
 import ClienteController from "@/adapters/controllers/cliente.controller";
 import { prisma } from "@/adapters/Driven/infrastructure/database";
 import ClienteRepository from "@/adapters/Driver/ClienteRepository";
@@ -6,7 +6,21 @@ import ClienteRepository from "@/adapters/Driver/ClienteRepository";
 const clienteRepository = new ClienteRepository(prisma);
 const clienteController = new ClienteController(clienteRepository);
 
-export default express()
-    .get("/cliente/:cpf/", clienteController.getCliente)
+class clienteRoutes implements IClienteRoutes{
+    private express: any;
 
-    .post("/cliente", clienteController.createCliente);
+    constructor(express: any) {
+        this.express = express;
+    }
+
+
+    buildRoutes() {
+        console.log("Building cliente routes");
+        this.express
+        .get("/cliente/:cpf/", clienteController.getCliente)
+        .post("/cliente", clienteController.createCliente);
+    }
+
+}
+
+export default clienteRoutes;
