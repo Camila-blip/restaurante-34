@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import http from "http";
-import "./adapters/Driven/infrastructure/database";
+import "./database";
 import bodyParser from "body-parser";
 import cors from "cors";
 
