@@ -11,7 +11,7 @@ model Cliente {
   id      Int      @id @default(autoincrement())
   nome    String?
   email   String   @unique
-  dataNascimento DateTime?
+  data DateTime?
   cpf     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
