@@ -1,10 +1,13 @@
-import { ClienteRepository } from "@/domain/repositories/ClienteRepository";
-import { Response } from "express";
+import { IClienteRepository } from "@/core/domain/repositories/IClienteRepository";
+import { Response, Request } from "express";
 
 export default class ClienteController {
-    constructor(private clienteRepository: ClienteRepository) {}
 
-    async getCliente(req: any, res: Response) {
+    constructor(private clienteRepository: IClienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
+
+    async getCliente(req: Request, res: Response) {
         try {
             const { id, nome, cpf, email, data } = req.body;
 
@@ -28,7 +31,7 @@ export default class ClienteController {
         }
     }
 
-    async createCliente(req: any, res: Response) {
+    async createCliente(req: Request, res: Response) {
         try {
             return res.status(400).json({ message: "Sucesso criar cliente" });
         } catch (error) {
