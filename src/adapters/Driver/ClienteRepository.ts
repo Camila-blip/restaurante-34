@@ -10,6 +10,7 @@ class ClienteRepository implements IClienteRepository {
     }
 
     async create(cliente: Cliente): Promise<Cliente> {
+      try {
         const creationResponse = await this.prismaClient.cliente.create({
             data: {
                 nome: cliente.nome,
@@ -26,25 +27,29 @@ class ClienteRepository implements IClienteRepository {
             email: creationResponse.email,
             data: creationResponse.data,
         } as Cliente;
+      } catch (error) {
+        throw error;
+      }
     }
 
-    async get(id: number): Promise<Cliente> {
-      const clienteFound = await this.prismaClient.cliente.findUnique({
+    async getByCpf(cpf: string): Promise<Cliente> {
+      const foundCliente = await this.prismaClient.cliente.findUnique({
         where: {
-          id: id,
+          cpf: cpf,
         },
       });
 
-      if (!clienteFound) {
+      
+      if (!foundCliente) {
         throw new Error("Cliente não encontrado");
       }
 
       return {
-        id: clienteFound.id,
-        nome: clienteFound.nome,
-        cpf: clienteFound.cpf,
-        email: clienteFound.email,
-        data: clienteFound.data,
+        id: foundCliente.id,
+        nome: foundCliente.nome,
+        cpf: foundCliente.cpf,
+        email: foundCliente.email,
+        data: foundCliente.data,
       } as Cliente;
     
     }
