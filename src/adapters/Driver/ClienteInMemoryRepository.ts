@@ -1,7 +1,7 @@
-import { ClienteRepository } from "@/domain/repositories/ClienteRepository";
-import { Cliente } from "@/domain/model/cliente";
+import { IClienteRepository } from "@/core/domain/repositories/IClienteRepository";
+import { Cliente } from "@/core/domain/Entities/cliente";
 
-class ClienteInMemoryRepository implements ClienteRepository {
+class ClienteInMemoryRepository implements IClienteRepository {
     private clientes: Cliente[] = [];
 
     async create(cliente: Cliente): Promise<Cliente> {
