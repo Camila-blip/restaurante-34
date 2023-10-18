@@ -16,3 +16,65 @@ model Cliente {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+model TipoAcesso{
+  id Int @id @default(autoincrement())
+  enumerador String
+}
+
+model Usuario{
+  id Int @id @default(autoincrement())
+  tipoacesso String
+  login String
+  senha String
+}
+
+model Funcionario{
+  id Int @id @default(autoincrement())
+  nome String
+  cargo String
+  admin String
+}
+
+model Pedido{
+  id Int @id @default(autoincrement())
+  statuspedido String
+  produtos String
+  statuspagamento String
+  cliente String
+}
+
+model StatusPedido{
+  id Int @id @default(autoincrement())
+  enumerador String
+}
+
+model  StatusPagamento{
+  id Int @id @default(autoincrement())
+  enumerador String
+}
+model Cardapio{
+  id Int @id @default(autoincrement())
+  produto Int
+  categoria String
+}
+
+model Produto{
+  id Int @id @default(autoincrement())
+  descricao  String
+  preco String
+  categoria String
+}
+
+model Pagamento{
+  id Int @id @default(autoincrement())
+  realizado Boolean
+  tipo String
+  data DateTime
+  valor Float
+  pedido Int
+}
+
+model CategoriaProduto{
+  id Int @id @default(autoincrement())
+  enumerador String
+}
