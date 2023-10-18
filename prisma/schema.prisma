@@ -7,40 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Cliente {
   id      Int      @id @default(autoincrement())
+  nome    String?
   email   String   @unique
-  name    String?
-  role    Role     @default(USER)
-  posts   Post[]
-  profile Profile?
-}
-
-model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
-  userId Int    @unique
-  user   User   @relation(fields: [userId], references: [id])
-}
-
-model Post {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  title      String
-  published  Boolean    @default(false)
-  authorId   Int
-  author     User       @relation(fields: [authorId], references: [id])
-  categories Category[] @relation("CategoryToPost")
-}
-
-model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  posts Post[] @relation("CategoryToPost")
-}
-
-enum Role {
-  USER
-  ADMIN
+  data DateTime?
+  cpf     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

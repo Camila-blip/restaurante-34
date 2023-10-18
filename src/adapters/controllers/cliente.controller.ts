@@ -1,38 +1,47 @@
-import { ClienteRepository } from "@/domain/repositories/ClienteRepository";
-import { Response } from "express";
+// import { IClienteRepository } from "@/core/domain/repositories/IClienteRepository";
+import { Response, Request } from "express";
+import { IClienteController } from "./Iclientecontroller";
+import { CreateClienteUseCase } from "@/core/application/useCases/cliente/ClienteUseCase";
 
-export default class ClienteController {
-    constructor(private clienteRepository: ClienteRepository) {}
+export default class ClienteController implements IClienteController {
+    private createClienteUseCase: CreateClienteUseCase;
 
-    async getCliente(req: any, res: Response) {
+    constructor(CreateClienteUseCase: any) {
+      this.createClienteUseCase = CreateClienteUseCase;
+    }
+    
+    
+    async getClienteByCpf(req: Request, res: Response) {
+        const { cpf } = req.params;
+
+        if (!cpf) {
+          return res.status(400).json({ message: "Error buscar cliente, cpf vazio" });
+        }
+
         try {
-            const { id, nome, cpf, email, data } = req.body;
+          const cliente = await this.createClienteUseCase.executeGetByCpf(cpf);
 
-            // Crie uma instância do cliente com os dados recebidos
-            const novoCliente = {
-                id,
-                nome,
-                cpf,
-                email,
-                data,
-            };
+          return res.status(200).json({ message: "Sucesso buscar cliente", cliente});
+        } catch (error: any) {
 
-            // Chame o método create do repositório
-            const clienteCriado = await this.clienteRepository.create(
-                novoCliente
-            );
-
-            return res.status(400).json({ message: "Sucesso get cliente" });
-        } catch (error) {
-            return res.status(400).json({ message: "Error get Cliente" });
+          return res.status(400).json({ message: error?.message });
         }
     }
+            
+    async createCliente(req: Request, res: Response) {
+            const requestBody = req.body;
+         
+            if (!requestBody) {
+              return res.status(400).json({ message: "Error criar cliente, body vazio" });
+            }
+            
+            try {
+              const cliente = await this.createClienteUseCase.executeCreation(requestBody);
 
-    async createCliente(req: any, res: Response) {
-        try {
-            return res.status(400).json({ message: "Sucesso criar cliente" });
-        } catch (error) {
-            return res.status(400).json({ message: "Error criar cliente" });
-        }
-    }
+              return res.status(200).json({ message: "Sucesso criar cliente", cliente});
+            } catch (error:any) {
+              
+              return res.status(400).json({ message: error?.message });
+            }
+  }
 }
