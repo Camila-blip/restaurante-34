@@ -1,3 +1,5 @@
+import { Cliente } from "./cliente";
+
 class Pedido {
     constructor(
         public id: number,
