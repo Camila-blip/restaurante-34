@@ -18,10 +18,10 @@ class ClienteRoutes implements IClienteRoutes{
         console.log("Building cliente routes");
         this.express
         .get("/cliente/:cpf/", this.clienteController.getClienteByCpf.bind(this.clienteController))
+        .get("/cliente/id/:id/", this.clienteController.getClienteById.bind(this.clienteController))
         .post("/cliente", 
           this.postPayloadValidator.validateSchema.bind(this.postPayloadValidator),
-          this.clienteController.createCliente.bind(this.clienteController)
-        );
+          this.clienteController.createCliente.bind(this.clienteController));
     }
 
 }

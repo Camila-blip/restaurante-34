@@ -44,5 +44,16 @@ export class CreateClienteUseCase implements IClienteUseCase{
           // Lide com erros ou exceções, se necessário.
           throw error;
       }
-  }
+    }
+    async executeGetById(id: number): Promise<Cliente> {
+      try {
+        const foundCliente = await this.clienteRepository.getById(id);
+        if (!foundCliente) {
+          throw new Error("Cliente não encontrado");
+        }
+        return foundCliente;
+      } catch (error) {
+        throw error;
+      }
+    }
 }

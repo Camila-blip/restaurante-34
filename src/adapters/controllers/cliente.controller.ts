@@ -1,4 +1,3 @@
-// import { IClienteRepository } from "@/core/domain/repositories/IClienteRepository";
 import { Response, Request } from "express";
 import { IClienteController } from "./Iclientecontroller";
 import { CreateClienteUseCase } from "@/core/application/useCases/cliente/ClienteUseCase";
@@ -26,6 +25,23 @@ export default class ClienteController implements IClienteController {
 
           return res.status(400).json({ message: error?.message });
         }
+    }
+
+    async getClienteById(req: Request, res: Response) {
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({ message: "Error buscar cliente, id vazio" });
+      }
+
+      try {
+        const cliente = await this.createClienteUseCase.executeGetById(parseInt(id));
+
+        return res.status(200).json({ message: "Sucesso buscar cliente", cliente});
+      } catch (error: any) {
+
+        return res.status(400).json({ message: error?.message });
+      }
     }
             
     async createCliente(req: Request, res: Response) {

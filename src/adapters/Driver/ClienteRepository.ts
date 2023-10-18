@@ -53,6 +53,28 @@ class ClienteRepository implements IClienteRepository {
       } as Cliente;
     
     }
+    
+    async getById(id: number): Promise<Cliente> {
+      const foundCliente = await this.prismaClient.cliente.findUnique({
+        where: {
+          id: id,
+        },
+      });
+
+      
+      if (!foundCliente) {
+        throw new Error("Cliente não encontrado");
+      }
+
+      return {
+        id: foundCliente.id,
+        nome: foundCliente.nome,
+        cpf: foundCliente.cpf,
+        email: foundCliente.email,
+        data: foundCliente.data,
+      } as Cliente;
+    
+    }
 }
 
 export default ClienteRepository;
