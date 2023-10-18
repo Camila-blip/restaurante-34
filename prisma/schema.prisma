@@ -9,6 +9,9 @@ datasource db {
 
 model Cliente {
   id      Int      @id @default(autoincrement())
+  usuarioId Int @unique
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  pedido Pedido[]
   nome    String?
   email   String   @unique
   data DateTime?
@@ -19,50 +22,82 @@ model Cliente {
 model TipoAcesso{
   id Int @id @default(autoincrement())
   enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Usuario{
-  id Int @id @default(autoincrement())
-  tipoacesso String
+  id Int @id @default(autoincrement()) 
+  tipoAcesso String
   login String
   senha String
+  funcionario Funcionario?
+  cliente Cliente?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Funcionario{
-  id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement()) 
+  usuarioId Int @unique
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
   nome String
   cargo String
   admin String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Pedido{
   id Int @id @default(autoincrement())
-  statuspedido String
-  produtos String
-  statuspagamento String
-  cliente String
+  clienteId Int @unique
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+  statusPagamentoId Int @unique
+  statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
+  statusPedidoId Int @unique
+  statusPedido StatusPedido @relation(fields: [statusPedidoId], references: [id])
+  produtoId Int @unique
+  produtos Produto @relation(fields: [produtoId], references: [id])
+  nomeCliente String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model StatusPedido{
   id Int @id @default(autoincrement())
+  pedido Pedido?
   enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model  StatusPagamento{
+model StatusPagamento{
   id Int @id @default(autoincrement())
+  pedido Pedido?
   enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 model Cardapio{
   id Int @id @default(autoincrement())
-  produto Int
+  produto Produto[]
   categoria String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Produto{
   id Int @id @default(autoincrement())
+  cardapioId Int @unique
+  cardapio Cardapio @relation(fields: [cardapioId], references: [id])
+  categoriaProdutoId Int @unique
+  categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
+  pedido Pedido[]
   descricao  String
   preco String
   categoria String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Pagamento{
@@ -72,9 +107,14 @@ model Pagamento{
   data DateTime
   valor Float
   pedido Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model CategoriaProduto{
   id Int @id @default(autoincrement())
+  produto Produto?
   enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
