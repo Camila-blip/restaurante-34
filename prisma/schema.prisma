@@ -1,46 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
-model User {
+model Cliente {
   id      Int      @id @default(autoincrement())
+  usuarioId Int @unique
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  pedido Pedido[]
+  nome    String?
   email   String   @unique
-  name    String?
-  role    Role     @default(USER)
-  posts   Post[]
-  profile Profile?
+  data DateTime?
+  cpf     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model TipoAcesso{
+  id Int @id @default(autoincrement())
+  enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
-  user   User   @relation(fields: [userId], references: [id])
-  userId Int    @unique
+model Usuario{
+  id Int @id @default(autoincrement()) 
+  tipoAcesso String
+  login String
+  senha String
+  funcionario Funcionario?
+  cliente Cliente?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Post {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  title      String
-  published  Boolean    @default(false)
-  author     User       @relation(fields: [authorId], references: [id])
-  authorId   Int
-  categories Category[]
+model Funcionario{
+  id Int @id @default(autoincrement()) 
+  usuarioId Int @unique
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  nome String
+  cargo String
+  admin String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  posts Post[]
+model Pedido{
+  id Int @id @default(autoincrement())
+  clienteId Int @unique
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+  statusPagamentoId Int @unique
+  statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
+  statusPedidoId Int @unique
+  statusPedido StatusPedido @relation(fields: [statusPedidoId], references: [id])
+  produtoId Int @unique
+  produtos Produto @relation(fields: [produtoId], references: [id])
+  nomeCliente String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-enum Role {
-  USER
-  ADMIN
+model StatusPedido{
+  id Int @id @default(autoincrement())
+  pedido Pedido?
+  enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StatusPagamento{
+  id Int @id @default(autoincrement())
+  pedido Pedido?
+  enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Cardapio{
+  id Int @id @default(autoincrement())
+  produto Produto[]
+  categoria String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Produto{
+  id Int @id @default(autoincrement())
+  cardapioId Int @unique
+  cardapio Cardapio @relation(fields: [cardapioId], references: [id])
+  categoriaProdutoId Int @unique
+  categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
+  pedido Pedido[]
+  descricao  String
+  preco String
+  categoria String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pagamento{
+  id Int @id @default(autoincrement())
+  realizado Boolean
+  tipo String
+  data DateTime
+  valor Float
+  pedido Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CategoriaProduto{
+  id Int @id @default(autoincrement())
+  produto Produto?
+  enumerador String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
