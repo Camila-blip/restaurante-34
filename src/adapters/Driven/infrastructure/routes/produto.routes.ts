@@ -19,11 +19,6 @@ class ProdutoRoutes implements IProdutoRoutes {
     buildRoutes() {
         console.log("Building produto routes");
 
-        this.express.get(
-            `${this.BASE_URL}/produto`,
-
-            this.produtoController.createProduto.bind(this.produtoController)
-        );
         this.express.post(
             `${this.BASE_URL}/produto`,
 
@@ -31,14 +26,14 @@ class ProdutoRoutes implements IProdutoRoutes {
         );
 
         this.express.put(
-            `${this.BASE_URL}/produto/:id`,
+            `${this.BASE_URL}/produto`,
 
-            this.produtoController.createProduto.bind(this.produtoController)
+            this.produtoController.putProduto.bind(this.produtoController)
         );
         this.express.delete(
             `${this.BASE_URL}/produto/:id`,
 
-            this.produtoController.createProduto.bind(this.produtoController)
+            this.produtoController.deleteProduto.bind(this.produtoController)
         );
     }
 }
