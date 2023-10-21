@@ -9,5 +9,6 @@ export interface Cliente {
     createdAt: Date;
     updateAt: Date;
     usuarioId: number;
+    usuario: Usuario;
     pedido: Pedido;
 }

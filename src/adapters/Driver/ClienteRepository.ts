@@ -19,8 +19,7 @@ class ClienteRepository implements IClienteRepository {
                 data: cliente.data,
                 createdAt: cliente.createdAt,
                 updatedAt: cliente.updateAt,
-                usuarioId: cliente.usuarioId
-
+                usuarioId: cliente.usuarioId,
             },
         });
 
