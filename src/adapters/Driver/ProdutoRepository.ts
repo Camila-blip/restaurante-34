@@ -9,6 +9,7 @@ class ProdutoRepository implements IProdutoRepository {
         this.prismaClient = prismaClient;
     }
     async create(produto: Produto): Promise<Produto> {
+        console.log("create repository");
         try {
             const creationResponse = await this.prismaClient.produto.create({
                 data: {
