@@ -1,7 +1,12 @@
 import { IPedidoRepository } from "@/core/domain/repositories/IPedidoRepository";
-import { Pedido } from "@prisma/client";
+import { Pedido, PrismaClient } from "@prisma/client";
 
 class PedidoRepository implements IPedidoRepository{
+    private prismaClient: PrismaClient;
+
+    constructor(prismaClient: PrismaClient){
+      this.prismaClient = prismaClient;
+    }
 
     create(pedido: Pedido){
       return Promise.resolve({} as Pedido);

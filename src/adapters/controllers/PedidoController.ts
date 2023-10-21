@@ -1,47 +1,61 @@
 import { Pedido } from "@prisma/client";
 import { IPedidoController } from "./IPedidoController";
-import { IProdutosDoPedidoRepository } from "@/core/domain/repositories/IProdutosDoPedidoRepository";
-import { IPedidoRepository } from "@/core/domain/repositories/IPedidoRepository";
+import { IPedidoUseCase } from "@/core/application/useCases/pedido/IPedidoUseCase";
+import { Request, Response } from "express";
 
 class PedidoController implements IPedidoController{
-  private produtosDoPedidoRepository: IProdutosDoPedidoRepository;
-  private pedidoRepository: IPedidoRepository;
+  private pedidoUseCase: IPedidoUseCase;
 
-  constructor (produtosDoPedidoRepository: IProdutosDoPedidoRepository, pedidoRepository: IPedidoRepository){
-    this.produtosDoPedidoRepository = produtosDoPedidoRepository;
-    this.pedidoRepository = pedidoRepository;
+  constructor (pedidoUseCase: IPedidoUseCase){
+    this.pedidoUseCase = pedidoUseCase;
   }
 
   async createPedido(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async getPedidoById(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async getPedidos(req: Request, res: Response) {
-    return Promise.resolve([] as Pedido[]);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async addProdutoAoPedido(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async removeProdutoAoPedido(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async updatePedidoPreparacao(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async updatePedidoAguardandoPagamento(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 
   async updatePedidoFinalizado(req: Request, res: Response) {
-    return Promise.resolve({} as Pedido);
+    return res
+    .status(200)
+    .json({ message: "rota criada" });
   }
 }
 

@@ -1,6 +1,14 @@
 import { IProdutosDoPedidoRepository } from "@/core/domain/repositories/IProdutosDoPedidoRepository";
+import { PrismaClient } from "@prisma/client";
 
 class ProdutosDoPedido implements IProdutosDoPedidoRepository{
+
+  private prismaClient: PrismaClient;
+
+  constructor(prismaClient: PrismaClient){
+    this.prismaClient = prismaClient;
+  }
+
   create(idProduto: number, idPedido: number): Promise<void> {
     return Promise.resolve();
   }
