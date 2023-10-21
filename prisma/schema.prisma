@@ -59,6 +59,7 @@ model Pedido{
   produtoId Int @unique
   produtos Produto @relation(fields: [produtoId], references: [id])
   nomeCliente String
+  ProdutosDoPedido ProdutosDoPedido[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -86,10 +87,20 @@ model Cardapio{
   updatedAt DateTime @updatedAt
 }
 
+model ProdutosDoPedido{
+  id Int @id @default(autoincrement())
+  produtoId Int @unique
+  produto Produto @relation(fields: [produtoId], references: [id])
+  pedidoId Int
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Produto{
   id Int @id @default(autoincrement())
-  cardapioId Int @unique
-  cardapio Cardapio @relation(fields: [cardapioId], references: [id])
+  cardapio Cardapio[]
+  ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int @unique
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
   pedido Pedido[]
