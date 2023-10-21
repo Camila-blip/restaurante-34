@@ -23,17 +23,25 @@ class PedidoRoutes implements IpedidoRoutes {
             `${this.BASE_URL}/pedido`,
             this.pedidoController.createPedido.bind(this.pedidoController)
         )
+        .post(
+            `${this.BASE_URL}/pedido/:idPedido/produto`,
+            this.pedidoController.addProdutoAoPedido.bind(this.pedidoController)
+        )
+        .delete(
+            `${this.BASE_URL}/pedido/:idPedido/produto`,
+            this.pedidoController.removeProdutoAoPedido.bind(this.pedidoController)
+        )
         .get(
             `${this.BASE_URL}/pedidos`,
             this.pedidoController.getPedidos.bind(this.pedidoController)
         )
         .get(
-            `${this.BASE_URL}/pedido/:id`,
+            `${this.BASE_URL}/pedido/:idPedido`,
             this.pedidoController.getPedidoById.bind(this.pedidoController)
         )
         .patch(
-            `${this.BASE_URL}/pedido/:id/:status`,
-            this.pedidoController.updatePedidoPreparacao.bind(this.pedidoController)
+            `${this.BASE_URL}/pedido/:idPedido/alterar-status`,
+            this.pedidoController.updatePedido.bind(this.pedidoController)
         );
     }
 }

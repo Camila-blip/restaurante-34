@@ -6,7 +6,5 @@ export interface IPedidoController{
     getPedidos(req: Request, res: Response): any;
     addProdutoAoPedido(req: Request, res: Response): any;
     removeProdutoAoPedido(req: Request, res: Response): any;
-    updatePedidoPreparacao(req: Request, res: Response): any;
-    updatePedidoAguardandoPagamento(req: Request, res: Response): any;
-    updatePedidoFinalizado(req: Request, res: Response): any;
+    updatePedido(req: Request, res: Response): any;
 }

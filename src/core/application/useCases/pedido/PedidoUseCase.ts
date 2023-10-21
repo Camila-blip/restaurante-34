@@ -1,6 +1,7 @@
 import { IPedidoRepository } from "@/core/domain/repositories/IPedidoRepository";
 import { IPedidoUseCase } from "./IPedidoUseCase";
 import { IProdutosDoPedidoRepository } from "@/core/domain/repositories/IProdutosDoPedidoRepository";
+import Pedido from "@/core/domain/Entities/pedido";
 
 class PedidoUseCase implements IPedidoUseCase {
 
@@ -12,18 +13,45 @@ class PedidoUseCase implements IPedidoUseCase {
     this.pedidoRepository = pedidoRepository;
   }
 
-  executeCreation(clienteData: { id: number; clienteId: number; statusPagamentoId: number; statusPedidoId: number; produtoId: number; nomeCliente: string; createdAt: Date; updatedAt: Date; }): Promise<{ id: number; clienteId: number; statusPagamentoId: number; statusPedidoId: number; produtoId: number; nomeCliente: string; createdAt: Date; updatedAt: Date; }> {
-    throw new Error("Method not implemented.");
+  executeCreation(clienteData: Pedido) {
+    throw new Error("Method executeCreation not implemented.");
   }
 
-  executeDelete(id: number): Promise<{ id: number; clienteId: number; statusPagamentoId: number; statusPedidoId: number; produtoId: number; nomeCliente: string; createdAt: Date; updatedAt: Date; }> {
-    throw new Error("Method not implemented.");
+  executeDelete(id: number) {
+    throw new Error("Method executeDelete not implemented.");
   }
 
-  executeGetById(id: number): Promise<{ id: number; clienteId: number; statusPagamentoId: number; statusPedidoId: number; produtoId: number; nomeCliente: string; createdAt: Date; updatedAt: Date; }> {
-    throw new Error("Method not implemented.");
+  executeUpdatePedidoAguardandoPagamento(idPedido: number) {
+    throw new Error("Method executeUpdatePedidoAguardandoPagamento not implemented.");
   }
 
+  executeUpdatePedidoFinalizado(idPedido: number) {
+    throw new Error("Method executeUpdatePedidoFinalizado not implemented.");
+  }
+
+  executeUpdatePedidoPreparacao(idPedido: number) {
+    throw new Error("Method executeUpdatePedidoPreparacao not implemented.");
+  }
+
+  executeGetPedidoById(idPedido: number) {
+    throw new Error("Method executeGetPedidoById not implemented.");
+  }
+
+  executeGetPedidos(status: string) {
+    throw new Error("Method executeGetPedidos not implemented.");
+  }
+
+  executeUpdatePedidoPronto(idPedido: number) {
+    throw new Error("Method executeUpdatePedidoPronto not implemented.");
+  }
+
+  executeAddProdutoAoPedido(idPedido: number, idProdutos: number[]) {
+    throw new Error("Method executeAddProdutoAoPedido not implemented.");
+  }
+
+  executeRemoveProdutoAoPedido(idPedido: number, idProdutos: number[]) {
+    throw new Error("Method executeRemoveProdutoAoPedido not implemented.");
+  }
 }
 
 export default PedidoUseCase;

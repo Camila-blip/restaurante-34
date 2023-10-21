@@ -1,7 +1,14 @@
-import { Pedido } from "@prisma/client";
+import Pedido from "@/core/domain/Entities/pedido";
 
 export interface IPedidoUseCase{
-  executeCreation(clienteData: Pedido): Promise<Pedido>;
-  executeDelete(id: number): Promise<Pedido>;
-  executeGetById(id: number): Promise<Pedido>;
+  executeCreation(pedidoData: Pedido): any;
+  executeDelete(idPedido: number): any;
+  executeGetPedidoById(idPedido: number): any;
+  executeGetPedidos(status: string): any;
+  executeAddProdutoAoPedido(idPedido: number, idProdutos: number[]): any;
+  executeRemoveProdutoAoPedido(idPedido: number, idProdutos: number[]): any;
+  executeUpdatePedidoPreparacao(idPedido: number): any;
+  executeUpdatePedidoAguardandoPagamento(idPedido: number): any;
+  executeUpdatePedidoPronto(idPedido: number): any;
+  executeUpdatePedidoFinalizado(idPedido: number): any;
 }
