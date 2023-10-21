@@ -21,7 +21,7 @@ model Cliente {
 }
 model TipoAcesso{
   id Int @id @default(autoincrement())
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -29,7 +29,7 @@ model TipoAcesso{
 model Usuario{
   id Int @id @default(autoincrement()) 
   tipoAcesso String
-  login String
+  login String @unique
   senha String
   funcionario Funcionario?
   cliente Cliente?
@@ -67,7 +67,7 @@ model Pedido{
 model StatusPedido{
   id Int @id @default(autoincrement())
   pedido Pedido?
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -75,7 +75,7 @@ model StatusPedido{
 model StatusPagamento{
   id Int @id @default(autoincrement())
   pedido Pedido?
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -125,7 +125,7 @@ model Pagamento{
 model CategoriaProduto{
   id Int @id @default(autoincrement())
   produto Produto?
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
