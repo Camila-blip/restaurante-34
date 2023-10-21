@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { IClienteController } from "./Iclientecontroller";
+import { IClienteController } from "./IClienteController";
 import { CreateClienteUseCase } from "@/core/application/useCases/cliente/ClienteUseCase";
 
 export default class ClienteController implements IClienteController {
