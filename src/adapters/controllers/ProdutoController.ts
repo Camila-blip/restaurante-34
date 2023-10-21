@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
 import { CreateProdutoUseCase } from "@/core/application/useCases/produto/ProdutoUseCase";
-import { IProdutoController } from "./IProdutoController";
+import { IProdutoController } from "@/adapters/controllers/Iprodutocontroller";
 
 export default class ProdutoController implements IProdutoController {
     private createProdutoUseCase: CreateProdutoUseCase;

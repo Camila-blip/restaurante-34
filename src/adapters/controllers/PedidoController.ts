@@ -1,37 +1,46 @@
 import { Pedido } from "@prisma/client";
 import { IPedidoController } from "./IPedidoController";
+import { IProdutosDoPedidoRepository } from "@/core/domain/repositories/IProdutosDoPedidoRepository";
+import { IPedidoRepository } from "@/core/domain/repositories/IPedidoRepository";
 
 class PedidoController implements IPedidoController{
+  private produtosDoPedidoRepository: IProdutosDoPedidoRepository;
+  private pedidoRepository: IPedidoRepository;
 
-  createPedido(req: Request, res: Response) {
+  constructor (produtosDoPedidoRepository: IProdutosDoPedidoRepository, pedidoRepository: IPedidoRepository){
+    this.produtosDoPedidoRepository = produtosDoPedidoRepository;
+    this.pedidoRepository = pedidoRepository;
+  }
+
+  async createPedido(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 
-  getPedidoById(req: Request, res: Response) {
+  async getPedidoById(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 
-  getPedidos(req: Request, res: Response) {
+  async getPedidos(req: Request, res: Response) {
     return Promise.resolve([] as Pedido[]);
   }
 
-  addProdutoAoPedido(req: Request, res: Response) {
+  async addProdutoAoPedido(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 
-  removeProdutoAoPedido(req: Request, res: Response) {
+  async removeProdutoAoPedido(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 
-  updatePedidoPreparacao(req: Request, res: Response) {
+  async updatePedidoPreparacao(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 
-  updatePedidoAguardandoPagamento(req: Request, res: Response) {
+  async updatePedidoAguardandoPagamento(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 
-  updatePedidoFinalizado(req: Request, res: Response) {
+  async updatePedidoFinalizado(req: Request, res: Response) {
     return Promise.resolve({} as Pedido);
   }
 }

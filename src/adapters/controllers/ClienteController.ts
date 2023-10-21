@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
-import { IClienteController } from "./IClienteController";
 import { CreateClienteUseCase } from "@/core/application/useCases/cliente/ClienteUseCase";
+import { IClienteController } from "@/adapters/controllers/Iclientecontroller";
 
 export default class ClienteController implements IClienteController {
     private createClienteUseCase: CreateClienteUseCase;
