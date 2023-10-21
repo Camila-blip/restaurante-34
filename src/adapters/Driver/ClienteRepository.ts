@@ -17,6 +17,10 @@ class ClienteRepository implements IClienteRepository {
                 cpf: cliente.cpf,
                 email: cliente.email,
                 data: cliente.data,
+                createdAt: cliente.createdAt,
+                updatedAt: cliente.updateAt,
+                usuarioId: cliente.usuarioId
+
             },
         });
 
@@ -26,6 +30,9 @@ class ClienteRepository implements IClienteRepository {
             cpf: creationResponse.cpf,
             email: creationResponse.email,
             data: creationResponse.data,
+            createdAt: creationResponse.createdAt,
+            updateAt: creationResponse.updatedAt,
+            usuarioId: creationResponse.usuarioId
         } as Cliente;
       } catch (error) {
         throw error;
@@ -50,6 +57,9 @@ class ClienteRepository implements IClienteRepository {
         cpf: foundCliente.cpf,
         email: foundCliente.email,
         data: foundCliente.data,
+        createdAt: foundCliente.createdAt,
+        updateAt: foundCliente.createdAt,
+        usuarioId: foundCliente.usuarioId
       } as Cliente;
     
     }
@@ -72,6 +82,9 @@ class ClienteRepository implements IClienteRepository {
         cpf: foundCliente.cpf,
         email: foundCliente.email,
         data: foundCliente.data,
+        createdAt: foundCliente.createdAt,
+        updateAt: foundCliente.createdAt,
+        usuarioId: foundCliente.usuarioId
       } as Cliente;
     
     }
