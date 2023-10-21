@@ -28,6 +28,12 @@ class ClienteRoutes implements IClienteRoutes {
                     this.clienteController
                 )
             )
+            .get(
+                "/cliente/id/:id/",
+                this.clienteController.getClienteById.bind(
+                    this.clienteController
+                )
+            )
             .post(
                 "/cliente",
                 this.postPayloadValidator.validateSchema.bind(
