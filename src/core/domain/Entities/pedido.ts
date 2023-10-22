@@ -1,4 +1,5 @@
 import { Cliente } from "./cliente";
+import { Produto } from "./produto";
 
 class Pedido {
     constructor(
@@ -9,3 +10,5 @@ class Pedido {
         public cliente: Cliente
     ) {}
 }
+
+export default Pedido;

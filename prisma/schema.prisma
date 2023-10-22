@@ -21,7 +21,7 @@ model Cliente {
 }
 model TipoAcesso{
   id Int @id @default(autoincrement())
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -29,7 +29,7 @@ model TipoAcesso{
 model Usuario{
   id Int @id @default(autoincrement()) 
   tipoAcesso String
-  login String
+  login String @unique
   senha String
   funcionario Funcionario?
   cliente Cliente?
@@ -59,6 +59,7 @@ model Pedido{
   produtoId Int @unique
   produtos Produto @relation(fields: [produtoId], references: [id])
   nomeCliente String
+  ProdutosDoPedido ProdutosDoPedido[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -66,7 +67,7 @@ model Pedido{
 model StatusPedido{
   id Int @id @default(autoincrement())
   pedido Pedido?
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -74,7 +75,7 @@ model StatusPedido{
 model StatusPagamento{
   id Int @id @default(autoincrement())
   pedido Pedido?
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -86,10 +87,20 @@ model Cardapio{
   updatedAt DateTime @updatedAt
 }
 
+model ProdutosDoPedido{
+  id Int @id @default(autoincrement())
+  produtoId Int @unique
+  produto Produto @relation(fields: [produtoId], references: [id])
+  pedidoId Int
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Produto{
   id Int @id @default(autoincrement())
-  cardapioId Int @unique
-  cardapio Cardapio @relation(fields: [cardapioId], references: [id])
+  cardapio Cardapio[]
+  ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int @unique
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
   pedido Pedido[]
@@ -114,7 +125,7 @@ model Pagamento{
 model CategoriaProduto{
   id Int @id @default(autoincrement())
   produto Produto?
-  enumerador String
+  enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
