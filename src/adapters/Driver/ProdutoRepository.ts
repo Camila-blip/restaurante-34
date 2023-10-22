@@ -12,19 +12,28 @@ class ProdutoRepository implements IProdutoRepository {
         try {
             const creationResponse = await this.prismaClient.produto.create({
                 data: {
+                    cardapio: produto.cardapio,
+                    ProdutosDoPedido: produto.ProdutosDoPedido,
+                    categoriaProduto: produto.categoriaProduto,
+                    pedido: produto.pedido,
                     descricao: produto.descricao,
                     preco: produto.preco,
                     categoria: produto.categoria,
                 },
             });
-
+            console.log("creationResponse", creationResponse);
             return {
                 id: creationResponse.id,
+                // cardapio: creationResponse.cardapio,
+                // ProdutosDoPedido: creationResponse.ProdutosDoPedido,
+                // categoriaProduto: creationResponse.categoriaProduto,
+                // pedido: creationResponse.pedido,
                 descricao: creationResponse.descricao,
                 preco: creationResponse.preco,
                 categoria: creationResponse.categoria,
             } as Produto;
         } catch (error) {
+            console.log("error", error);
             throw error;
         }
     }

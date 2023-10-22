@@ -1,5 +1,5 @@
 import { IProdutoRoutes } from "@/adapters/Driven/infrastructure/routes/IProdutoRoutes";
-import { IProdutoController } from "@/adapters/controllers/IProdutoController";
+import { IProdutoController } from "@/adapters/controllers/Iprodutocontroller";
 
 class ProdutoRoutes implements IProdutoRoutes {
     private express: any;

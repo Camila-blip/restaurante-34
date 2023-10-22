@@ -33,12 +33,12 @@ export default class ProdutoController implements IProdutoController {
         try {
             const requestBody = req.body;
 
-            const produto = await this.createProdutoUseCase.executeCreation(
-                requestBody
-            );
+            // const produto = await this.createProdutoUseCase.executeCreation(
+            //     requestBody
+            // );
             return res
                 .status(200)
-                .json({ message: "Sucesso ao atualizar o produto", produto });
+                .json({ message: "Sucesso ao atualizar o produto" });
         } catch (error) {
             return res.status(400).json({ message: "error?.message " });
         }
