@@ -1,5 +1,5 @@
-import { Cliente } from "./cliente";
-import { Produto } from "./produto";
+import { Cliente } from "./Cliente";
+import { Produto } from "./Produto";
 
 class Pedido {
     constructor(
