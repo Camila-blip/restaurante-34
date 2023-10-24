@@ -1,4 +1,4 @@
-import { IClienteRepository } from "@/core/domain/repositories/IClienteRepository";
+import { IClienteRepository } from "@/core/ports/IClienteRepository";
 import { Cliente } from "@/core/domain/Entities/cliente";
 import { PrismaClient } from "@prisma/client";
 
