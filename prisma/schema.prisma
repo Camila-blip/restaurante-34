@@ -81,8 +81,9 @@ model StatusPagamento{
 }
 model Cardapio{
   id Int @id @default(autoincrement())
-  produto Produto[]
-  categoria String
+  produtosDoCardapio ProdutosDoCardapio[]
+  descricao String
+  ativo Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -99,7 +100,7 @@ model ProdutosDoPedido{
 
 model Produto{
   id Int @id @default(autoincrement())
-  cardapio Cardapio[]
+  produtosDoCardapio ProdutosDoCardapio[]
   ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int @unique
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
@@ -126,6 +127,16 @@ model CategoriaProduto{
   id Int @id @default(autoincrement())
   produto Produto?
   enumerador String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProdutosDoCardapio {
+  id Int @id @default(autoincrement())
+  produto Produto @relation(fields: [produtoId], references: [id])
+  produtoId Int @unique
+  cardapio Cardapio @relation(fields: [cardapioId], references: [id])
+  cardapioId Int @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
