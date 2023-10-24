@@ -1,4 +1,4 @@
-import { IProdutosDoPedidoRepository } from "@/core/domain/repositories/IProdutosDoPedidoRepository";
+import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
 import { PrismaClient } from "@prisma/client";
 
 class ProdutosDoPedido implements IProdutosDoPedidoRepository{

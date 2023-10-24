@@ -1,4 +1,4 @@
-import { IPedidoRepository } from "@/core/domain/repositories/IPedidoRepository";
+import { IPedidoRepository } from "@/core/ports/IPedidoRepository";
 import { Pedido, PrismaClient } from "@prisma/client";
 
 class PedidoRepository implements IPedidoRepository{

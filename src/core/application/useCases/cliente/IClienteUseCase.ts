@@ -1,4 +1,4 @@
-import { Cliente } from "@/core/domain/Entities/cliente";
+import { Cliente } from "@/core/domain/Entities/Cliente";
 
 export interface IClienteUseCase {
   executeCreation(clienteData: Cliente): Promise<Cliente>;
