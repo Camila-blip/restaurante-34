@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -14,16 +15,15 @@ model Cliente {
   pedido Pedido[]
   nome    String?
   email   String   @unique
-  data DateTime?
   cpf     String   @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 model TipoAcesso{
   id Int @id @default(autoincrement())
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Usuario{
@@ -34,7 +34,7 @@ model Usuario{
   funcionario Funcionario?
   cliente Cliente?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Funcionario{
@@ -45,39 +45,35 @@ model Funcionario{
   cargo String
   admin String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Pedido{
   id Int @id @default(autoincrement())
-  clienteId Int @unique
+  clienteId Int 
   cliente Cliente @relation(fields: [clienteId], references: [id])
-  statusPagamentoId Int @unique
-  statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
-  statusPedidoId Int @unique
+  pagamento Pagamento[]
+  statusPedidoId Int
   statusPedido StatusPedido @relation(fields: [statusPedidoId], references: [id])
-  produtoId Int @unique
-  produtos Produto @relation(fields: [produtoId], references: [id])
-  nomeCliente String
   ProdutosDoPedido ProdutosDoPedido[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model StatusPedido{
   id Int @id @default(autoincrement())
-  pedido Pedido?
+  pedido Pedido[]
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model StatusPagamento{
   id Int @id @default(autoincrement())
-  pedido Pedido?
+  pagamento Pagamento[]
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 model Cardapio{
   id Int @id @default(autoincrement())
@@ -85,26 +81,25 @@ model Cardapio{
   descricao String 
   ativo Boolean @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model ProdutosDoPedido{
   id Int @id @default(autoincrement())
-  produtoId Int @unique
+  produtoId Int
   produto Produto @relation(fields: [produtoId], references: [id])
   pedidoId Int
   pedido Pedido @relation(fields: [pedidoId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Produto{
  id Int @id @default(autoincrement())
   produtosDoCardapio ProdutosDoCardapio[]
   ProdutosDoPedido ProdutosDoPedido[]
-  categoriaProdutoId Int @unique
+  categoriaProdutoId Int
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
-  pedido Pedido[]
   descricao  String
   preco Decimal
   createdAt DateTime @default(now())
@@ -113,29 +108,31 @@ model Produto{
 
 model Pagamento{
   id Int @id @default(autoincrement())
-  realizado Boolean
+  statusPagamentoId Int
+  statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
+  pedidoId Int
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
   tipo String
   data DateTime
-  valor Float
-  pedido Int
+  valor Decimal
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model CategoriaProduto{
   id Int @id @default(autoincrement())
-  produto Produto?
+  produto Produto[]
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model ProdutosDoCardapio {
   id Int @id @default(autoincrement())
   produto Produto @relation(fields: [produtoId], references: [id])
-  produtoId Int @unique
+  produtoId Int 
   cardapio Cardapio @relation(fields: [cardapioId], references: [id])
-  cardapioId Int @unique
+  cardapioId Int
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }

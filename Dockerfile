@@ -1,26 +1,20 @@
-FROM node:16 AS builder
+# Use a imagem oficial do Node.js como imagem base
+FROM node:16.13
 
-# Create app directory
-WORKDIR /app
+# Define o diretório de trabalho dentro do contêiner
+WORKDIR /usr/src/app
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# Copie o arquivo package.json e package-lock.json para o diretório de trabalho
 COPY package*.json ./
-COPY . .
 
-# Install app dependencies
+# Instale as dependências do aplicativo
 RUN npm install
 
+# Copie todo o código-fonte do aplicativo para o contêiner
 COPY . .
 
-RUN npm run build
-
-FROM node:16
-
-WORKDIR /app
-
-#COPY --from=builder /app/node_modules ./node_modules
-#COPY --from=builder /app/package*.json ./
-#COPY --from=builder /app/dist ./dist
-
+# Exponha a porta em que o aplicativo estará em execução (substitua a porta apropriada)
 EXPOSE 3000
-CMD [ "npm", "run", "start:prod" ]
+
+# Comando para iniciar o aplicativo
+CMD [ "node", "public/server.js" ]

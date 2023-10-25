@@ -1,7 +1,8 @@
 import { IPedidoRepository } from "@/core/ports/IPedidoRepository";
 import { IPedidoUseCase } from "./IPedidoUseCase";
 import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
-import Pedido from "@/core/domain/Entities/Pedido";
+import Pedido from "@/core/domain/Entities/pedido";
+
 
 class PedidoUseCase implements IPedidoUseCase {
 
@@ -13,8 +14,17 @@ class PedidoUseCase implements IPedidoUseCase {
     this.pedidoRepository = pedidoRepository;
   }
 
-  executeCreation(clienteData: Pedido) {
-    throw new Error("Method executeCreation not implemented.");
+  async executeCreation(clienteData: Pedido) {
+    clienteData.statusPedidoId = 1;
+    try{
+      const response = await this.pedidoRepository.create(clienteData);
+
+      return response;
+    }
+    catch(error){
+      throw error;
+    }
+    
   }
 
   executeDelete(id: number) {
