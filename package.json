@@ -12,7 +12,7 @@
         "start": "node public/server.js",
         "dev": "tsx watch src/adapters/Driven/infrastructure/server.ts",
         "build": "npx prisma generate && tsc",
-        "prisma:prepare": "docker compose up -d && npx prisma generate && npx prisma migrate dev --name init"
+        "prisma:prepare": "docker compose up -d && npx prisma generate && npx prisma migrate dev --name init && npx prisma db seed"
     },
     "dependencies": {
         "@prisma/client": "^5.1.1",
