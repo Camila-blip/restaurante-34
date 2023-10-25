@@ -85,17 +85,19 @@ model Cardapio{
 }
 
 model ProdutosDoPedido{
-  id Int @id @default(autoincrement())
+  @@id([ produtoId, pedidoId ])
   produtoId Int
   produto Produto @relation(fields: [produtoId], references: [id])
   pedidoId Int
   pedido Pedido @relation(fields: [pedidoId], references: [id])
+  quantidade Int
+  valor Decimal
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
 
 model Produto{
- id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   produtosDoCardapio ProdutosDoCardapio[]
   ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int
@@ -128,7 +130,7 @@ model CategoriaProduto{
 }
 
 model ProdutosDoCardapio {
-  id Int @id @default(autoincrement())
+  @@id([ produtoId, cardapioId])
   produto Produto @relation(fields: [produtoId], references: [id])
   produtoId Int 
   cardapio Cardapio @relation(fields: [cardapioId], references: [id])
