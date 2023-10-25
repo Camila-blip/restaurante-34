@@ -6,7 +6,7 @@ const ClientePostSchema = {
       nome: { type: "string", required: true },
       cpf: { type: "string", required: true },
       email: { type: "string", required: true },
-      data: { type: "string", required: true },
+      
   }
 } as JSONSchema4;
 
