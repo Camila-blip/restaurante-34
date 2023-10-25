@@ -1,38 +1,35 @@
-version: '3.5'
+version: '3'
 
 services:
-  prisma-migrate:
-    container_name: prisma-migrate
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    env_file:
-      - .env
-    environment:
-      DB_HOST: "postgresql://root:root@localhost:5438/mydb?schema=public"
-    depends_on:
-      - postgres
-
   postgres:
-    container_name: postgres_container
     image: postgres
     environment:
-      POSTGRES_HOST: localhost
       POSTGRES_DB: postgres
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      PGDATA: /data/postgres
-    volumes:
-       - postgres:/data/postgres
     ports:
-      - 5432:5432
+      - 5438:5432
+    container_name: db-restaurante-34
+    volumes:
+      - pg_data:/var/lib/postgresql/data
     networks:
+      - app-network
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurante-34-api
+    environment:
+    - DATABASE_URL=postgresql://root:root@postgres/postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    depends_on:
       - postgres
-    restart: unless-stopped
+    networks:
+      - app-network
 
 networks:
-  postgres:
-    driver: bridge
+  app-network:
 
 volumes:
-    postgres:
+  pg_data:
