@@ -9,6 +9,10 @@ export default class ProdutoController implements IProdutoController {
         this.createProdutoUseCase = CreateProdutoUseCase;
     }
 
+    async getProdutosCategoria(req: Request, res: Response) {
+        console.log("aqui");
+    }
+
     async createProduto(req: Request, res: Response) {
         const requestBody = req.body;
         if (!requestBody) {

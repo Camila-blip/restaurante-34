@@ -18,6 +18,13 @@ class ProdutoRoutes implements IProdutoRoutes {
 
     buildRoutes() {
         this.express.post(
+            `${this.BASE_URL}/produtos/categoria/:categoriaProdutoId`,
+
+            this.produtoController.getProdutosCategoria.bind(
+                this.produtoController
+            )
+        );
+        this.express.post(
             `${this.BASE_URL}/produto`,
 
             this.produtoController.createProduto.bind(this.produtoController)
