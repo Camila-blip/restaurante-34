@@ -11,17 +11,32 @@ export class CreateProdutoUseCase implements IProdutoUseCase {
 
     async executeCreation(produtoData: Produto): Promise<Produto> {
         try {
-            console.log("caso de uso");
-            // Aqui você pode adicionar lógica de validação ou manipulação de dados, se necessário.
-
-            // Chame o método create do repositório para criar um novo cliente
             const novoCliente = await this.produtoRepository.create(
                 produtoData
             );
 
             return novoCliente;
         } catch (error) {
-            // Lide com erros ou exceções, se necessário.
+            throw error;
+        }
+    }
+    async executeUpdate(produtoData: Produto): Promise<Produto> {
+        try {
+            const novoCliente = await this.produtoRepository.update(
+                produtoData
+            );
+
+            return novoCliente;
+        } catch (error) {
+            throw error;
+        }
+    }
+    async executeDelete(id: number): Promise<Produto> {
+        try {
+            const novoCliente = await this.produtoRepository.delete(id);
+
+            return novoCliente;
+        } catch (error) {
             throw error;
         }
     }

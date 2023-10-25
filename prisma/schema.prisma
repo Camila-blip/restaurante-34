@@ -82,8 +82,8 @@ model StatusPagamento{
 model Cardapio{
   id Int @id @default(autoincrement())
   produtosDoCardapio ProdutosDoCardapio[]
-  descricao String
-  ativo Boolean
+  descricao String 
+  ativo Boolean @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -99,16 +99,16 @@ model ProdutosDoPedido{
 }
 
 model Produto{
-  id Int @id @default(autoincrement())
+ id Int @id @default(autoincrement())
   produtosDoCardapio ProdutosDoCardapio[]
   ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int @unique
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
   pedido Pedido[]
   descricao  String
-  preco Float
+  preco Decimal
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Pagamento{

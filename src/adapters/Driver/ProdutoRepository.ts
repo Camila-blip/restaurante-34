@@ -8,51 +8,46 @@ class ProdutoRepository implements IProdutoRepository {
     constructor(prismaClient: PrismaClient) {
         this.prismaClient = prismaClient;
     }
+    put(produto: Produto): Promise<Produto> {
+        throw new Error("Method not implemented.");
+    }
     async create(produto: Produto): Promise<Produto> {
         try {
             const creationResponse = await this.prismaClient.produto.create({
                 data: {
-                    cardapio: produto.cardapio,
-                    ProdutosDoPedido: produto.ProdutosDoPedido,
-                    categoriaProduto: produto.categoriaProduto,
-                    pedido: produto.pedido,
+                    categoriaProdutoId: produto.categoriaProdutoId,
                     descricao: produto.descricao,
                     preco: produto.preco,
-                    categoria: produto.categoria,
                 },
             });
-            console.log("creationResponse", creationResponse);
+
             return {
                 id: creationResponse.id,
-                // cardapio: creationResponse.cardapio,
-                // ProdutosDoPedido: creationResponse.ProdutosDoPedido,
-                // categoriaProduto: creationResponse.categoriaProduto,
-                // pedido: creationResponse.pedido,
+                categoriaProdutoId: creationResponse.categoriaProdutoId,
                 descricao: creationResponse.descricao,
                 preco: creationResponse.preco,
-                categoria: creationResponse.categoria,
             } as Produto;
         } catch (error) {
-            console.log("error", error);
             throw error;
         }
     }
 
-    async put(produto: Produto): Promise<Produto> {
+    async update(produto: Produto): Promise<Produto> {
         try {
             const putResponse = await this.prismaClient.produto.update({
                 where: { id: produto.id },
                 data: {
+                    categoriaProdutoId: produto.categoriaProdutoId,
                     descricao: produto.descricao,
                     preco: produto.preco,
-                    categoria: produto.categoria,
                 },
             });
+
             return {
                 id: putResponse.id,
-                descricao: putResponse.descricao,
-                preco: putResponse.preco,
-                categoria: putResponse.categoria,
+                categoriaProdutoId: produto.categoriaProdutoId,
+                descricao: produto.descricao,
+                preco: produto.preco,
             } as Produto;
         } catch (error) {
             throw error;

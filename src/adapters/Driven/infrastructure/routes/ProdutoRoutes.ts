@@ -1,5 +1,5 @@
 import { IProdutoRoutes } from "@/adapters/Driven/infrastructure/routes/IProdutoRoutes";
-import { IProdutoController } from "@/adapters/controllers/Iprodutocontroller";
+import { IProdutoController } from "@/adapters/controllers/IProdutoController";
 
 class ProdutoRoutes implements IProdutoRoutes {
     private express: any;
@@ -17,8 +17,6 @@ class ProdutoRoutes implements IProdutoRoutes {
     }
 
     buildRoutes() {
-        console.log("Building produto routes");
-
         this.express.post(
             `${this.BASE_URL}/produto`,
 
@@ -28,7 +26,7 @@ class ProdutoRoutes implements IProdutoRoutes {
         this.express.put(
             `${this.BASE_URL}/produto`,
 
-            this.produtoController.putProduto.bind(this.produtoController)
+            this.produtoController.updateProduto.bind(this.produtoController)
         );
         this.express.delete(
             `${this.BASE_URL}/produto/:id`,

@@ -29,24 +29,33 @@ export default class ProdutoController implements IProdutoController {
             return res.status(400).json({ message: error?.message });
         }
     }
-    async putProduto(req: Request, res: Response) {
+    async updateProduto(req: Request, res: Response) {
         try {
             const requestBody = req.body;
 
-            // const produto = await this.createProdutoUseCase.executeCreation(
-            //     requestBody
-            // );
+            const produto = await this.createProdutoUseCase.executeUpdate(
+                requestBody
+            );
             return res
                 .status(200)
-                .json({ message: "Sucesso ao atualizar o produto" });
+                .json({ message: "Sucesso ao atualizar o produto", produto });
         } catch (error) {
-            return res.status(400).json({ message: "error?.message " });
+            return res
+                .status(400)
+                .json({ message: "Ops, algo de errado aconteceu!" });
         }
     }
 
     async deleteProduto(req: Request, res: Response) {
-        return res
-            .status(200)
-            .json({ message: "Sucesso ao deletar o produto" });
+        const { id } = req.params;
+        try {
+            await this.createProdutoUseCase.executeDelete(parseInt(id, 10));
+
+            return res
+                .status(200)
+                .json({ message: "Sucesso ao deletar o produto" });
+        } catch (error: any) {
+            return res.status(400).json({ message: error?.message });
+        }
     }
 }
