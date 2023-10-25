@@ -14,7 +14,6 @@ model Cliente {
   pedido Pedido[]
   nome    String?
   email   String   @unique
-  data DateTime?
   cpf     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -52,13 +51,9 @@ model Pedido{
   id Int @id @default(autoincrement())
   clienteId Int @unique
   cliente Cliente @relation(fields: [clienteId], references: [id])
-  statusPagamentoId Int @unique
-  statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
+  pagamento Pagamento[]
   statusPedidoId Int @unique
   statusPedido StatusPedido @relation(fields: [statusPedidoId], references: [id])
-  produtoId Int @unique
-  produtos Produto @relation(fields: [produtoId], references: [id])
-  nomeCliente String
   ProdutosDoPedido ProdutosDoPedido[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -74,7 +69,7 @@ model StatusPedido{
 
 model StatusPagamento{
   id Int @id @default(autoincrement())
-  pedido Pedido?
+  pagamento Pagamento?
   enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -104,7 +99,6 @@ model Produto{
   ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int @unique
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
-  pedido Pedido[]
   descricao  String
   preco Decimal
   createdAt DateTime @default(now())
@@ -113,11 +107,13 @@ model Produto{
 
 model Pagamento{
   id Int @id @default(autoincrement())
-  realizado Boolean
+  statusPagamentoId Int @unique
+  statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
+  pedidoId Int @unique 
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
   tipo String
   data DateTime
   valor Decimal
-  pedido Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
