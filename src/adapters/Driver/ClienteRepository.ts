@@ -16,7 +16,6 @@ class ClienteRepository implements IClienteRepository {
                 nome: cliente.nome,
                 cpf: cliente.cpf,
                 email: cliente.email,
-                data: cliente.data,
                 createdAt: cliente.createdAt,
                 updatedAt: cliente.updateAt,
                 usuarioId: cliente.usuarioId,
@@ -28,7 +27,6 @@ class ClienteRepository implements IClienteRepository {
             nome: creationResponse.nome,
             cpf: creationResponse.cpf,
             email: creationResponse.email,
-            data: creationResponse.data,
             createdAt: creationResponse.createdAt,
             updateAt: creationResponse.updatedAt,
             usuarioId: creationResponse.usuarioId
@@ -55,7 +53,6 @@ class ClienteRepository implements IClienteRepository {
         nome: foundCliente.nome,
         cpf: foundCliente.cpf,
         email: foundCliente.email,
-        data: foundCliente.data,
         createdAt: foundCliente.createdAt,
         updateAt: foundCliente.createdAt,
         usuarioId: foundCliente.usuarioId
@@ -80,7 +77,6 @@ class ClienteRepository implements IClienteRepository {
         nome: foundCliente.nome,
         cpf: foundCliente.cpf,
         email: foundCliente.email,
-        data: foundCliente.data,
         createdAt: foundCliente.createdAt,
         updateAt: foundCliente.createdAt,
         usuarioId: foundCliente.usuarioId
