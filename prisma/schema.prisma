@@ -106,8 +106,7 @@ model Produto{
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
   pedido Pedido[]
   descricao  String
-  preco String
-  categoria String
+  preco Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
