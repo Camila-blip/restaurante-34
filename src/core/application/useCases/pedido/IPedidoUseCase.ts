@@ -1,4 +1,4 @@
-import Pedido from "@/core/domain/Entities/pedido";
+import Pedido from "@/core/domain/Entities/Pedido";
 
 export interface IPedidoUseCase{
   executeCreation(pedidoData: Pedido): any;

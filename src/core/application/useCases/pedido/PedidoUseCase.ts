@@ -1,7 +1,7 @@
 import { IPedidoRepository } from "@/core/ports/IPedidoRepository";
 import { IPedidoUseCase } from "./IPedidoUseCase";
 import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
-import Pedido from "@/core/domain/Entities/pedido";
+import Pedido from "@/core/domain/Entities/Pedido";
 
 class PedidoUseCase implements IPedidoUseCase {
 

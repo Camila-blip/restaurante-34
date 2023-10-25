@@ -1,4 +1,4 @@
-import { Cliente } from "@/core/domain/Entities/cliente";
+import { Cliente } from "@/core/domain/Entities/Cliente";
 import { IClienteRepository } from "@/core/ports/IClienteRepository";
 import { IClienteUseCase } from "./IClienteUseCase";
 

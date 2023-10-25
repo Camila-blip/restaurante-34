@@ -18,13 +18,13 @@ model Cliente {
   data DateTime?
   cpf     String   @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 model TipoAcesso{
   id Int @id @default(autoincrement())
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Usuario{
@@ -35,7 +35,7 @@ model Usuario{
   funcionario Funcionario?
   cliente Cliente?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Funcionario{
@@ -46,7 +46,7 @@ model Funcionario{
   cargo String
   admin String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Pedido{
@@ -62,7 +62,7 @@ model Pedido{
   nomeCliente String
   ProdutosDoPedido ProdutosDoPedido[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model StatusPedido{
@@ -70,7 +70,7 @@ model StatusPedido{
   pedido Pedido?
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model StatusPagamento{
@@ -78,14 +78,15 @@ model StatusPagamento{
   pedido Pedido?
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 model Cardapio{
   id Int @id @default(autoincrement())
-  produto Produto[]
-  categoria String
+  produtosDoCardapio ProdutosDoCardapio[]
+  descricao String
+  ativo Boolean
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model ProdutosDoPedido{
@@ -95,21 +96,20 @@ model ProdutosDoPedido{
   pedidoId Int
   pedido Pedido @relation(fields: [pedidoId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Produto{
   id Int @id @default(autoincrement())
-  cardapio Cardapio[]
+  produtosDoCardapio ProdutosDoCardapio[]
   ProdutosDoPedido ProdutosDoPedido[]
   categoriaProdutoId Int @unique
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
   pedido Pedido[]
   descricao  String
-  preco String
-  categoria String
+  preco Decimal
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model Pagamento{
@@ -117,10 +117,10 @@ model Pagamento{
   realizado Boolean
   tipo String
   data DateTime
-  valor Float
+  valor Decimal
   pedido Int
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model CategoriaProduto{
@@ -128,5 +128,15 @@ model CategoriaProduto{
   produto Produto?
   enumerador String @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
+}
+
+model ProdutosDoCardapio {
+  id Int @id @default(autoincrement())
+  produto Produto @relation(fields: [produtoId], references: [id])
+  produtoId Int @unique
+  cardapio Cardapio @relation(fields: [cardapioId], references: [id])
+  cardapioId Int @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
