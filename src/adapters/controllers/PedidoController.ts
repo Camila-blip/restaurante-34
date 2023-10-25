@@ -13,7 +13,8 @@ class PedidoController implements IPedidoController{
     const { body } = req;
 
     try{
-      this.pedidoUseCase.executeCreation(body);
+      const response = await this.pedidoUseCase.executeCreation(body);
+      return res.status(200).json({ message: "Pedido criado com sucesso", response});
     }
     catch(error: any){
       return res.status(400).json({ message: error?.message });

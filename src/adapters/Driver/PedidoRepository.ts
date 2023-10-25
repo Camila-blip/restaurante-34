@@ -8,8 +8,19 @@ class PedidoRepository implements IPedidoRepository{
       this.prismaClient = prismaClient;
     }
 
-    create(pedido: Pedido){
-      return Promise.resolve({} as Pedido);
+    async create(pedido: Pedido){
+      try {
+        const pedido_response =  await this.prismaClient.pedido.create({
+          data: {
+            statusPedidoId: pedido.statusPedidoId,
+            clienteId: pedido.clienteId
+          }
+        });
+
+        return pedido_response;
+      } catch (error) {
+        throw error;
+      }
     }
 
     getPedidoById(id: number){
