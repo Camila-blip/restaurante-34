@@ -15,6 +15,7 @@ class PedidoUseCase implements IPedidoUseCase {
   }
 
   async executeCreation(clienteData: Pedido) {
+    clienteData.statusPedidoId = 1;
     try{
       const response = await this.pedidoRepository.create(clienteData);
 
