@@ -50,10 +50,10 @@ model Funcionario{
 
 model Pedido{
   id Int @id @default(autoincrement())
-  clienteId Int @unique
+  clienteId Int 
   cliente Cliente @relation(fields: [clienteId], references: [id])
   pagamento Pagamento[]
-  statusPedidoId Int @unique
+  statusPedidoId Int
   statusPedido StatusPedido @relation(fields: [statusPedidoId], references: [id])
   ProdutosDoPedido ProdutosDoPedido[]
   createdAt DateTime @default(now())
@@ -62,7 +62,7 @@ model Pedido{
 
 model StatusPedido{
   id Int @id @default(autoincrement())
-  pedido Pedido?
+  pedido Pedido[]
   enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -70,7 +70,7 @@ model StatusPedido{
 
 model StatusPagamento{
   id Int @id @default(autoincrement())
-  pagamento Pagamento?
+  pagamento Pagamento[]
   enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -86,7 +86,7 @@ model Cardapio{
 
 model ProdutosDoPedido{
   id Int @id @default(autoincrement())
-  produtoId Int @unique
+  produtoId Int
   produto Produto @relation(fields: [produtoId], references: [id])
   pedidoId Int
   pedido Pedido @relation(fields: [pedidoId], references: [id])
@@ -98,7 +98,7 @@ model Produto{
   id Int @id @default(autoincrement())
   produtosDoCardapio ProdutosDoCardapio[]
   ProdutosDoPedido ProdutosDoPedido[]
-  categoriaProdutoId Int @unique
+  categoriaProdutoId Int
   categoriaProduto CategoriaProduto @relation(fields: [categoriaProdutoId], references: [id])
   descricao  String
   preco Decimal
@@ -108,9 +108,9 @@ model Produto{
 
 model Pagamento{
   id Int @id @default(autoincrement())
-  statusPagamentoId Int @unique
+  statusPagamentoId Int
   statusPagamento StatusPagamento @relation(fields: [statusPagamentoId], references: [id])
-  pedidoId Int @unique 
+  pedidoId Int
   pedido Pedido @relation(fields: [pedidoId], references: [id])
   tipo String
   data DateTime
@@ -121,7 +121,7 @@ model Pagamento{
 
 model CategoriaProduto{
   id Int @id @default(autoincrement())
-  produto Produto?
+  produto Produto[]
   enumerador String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -130,9 +130,9 @@ model CategoriaProduto{
 model ProdutosDoCardapio {
   id Int @id @default(autoincrement())
   produto Produto @relation(fields: [produtoId], references: [id])
-  produtoId Int @unique
+  produtoId Int 
   cardapio Cardapio @relation(fields: [cardapioId], references: [id])
-  cardapioId Int @unique
+  cardapioId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
