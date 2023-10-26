@@ -8,23 +8,70 @@ class ProdutoRepository implements IProdutoRepository {
     constructor(prismaClient: PrismaClient) {
         this.prismaClient = prismaClient;
     }
+
+    async get(categoriaProdutoId: number): Promise<Produto[]> {
+        try {
+            const getResponse = await this.prismaClient.produto.findMany({
+                where: {
+                    categoriaProdutoId: categoriaProdutoId,
+                },
+            });
+            return getResponse as Produto[];
+        } catch (error) {
+            throw error;
+        }
+    }
     async create(produto: Produto): Promise<Produto> {
-        console.log("create repository");
         try {
             const creationResponse = await this.prismaClient.produto.create({
                 data: {
+                    categoriaProdutoId: produto.categoriaProdutoId,
                     descricao: produto.descricao,
                     preco: produto.preco,
-                    categoria: produto.categoria,
                 },
             });
 
             return {
                 id: creationResponse.id,
+                categoriaProdutoId: creationResponse.categoriaProdutoId,
                 descricao: creationResponse.descricao,
                 preco: creationResponse.preco,
-                categoria: creationResponse.categoria,
             } as Produto;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async update(produto: Produto): Promise<Produto> {
+        try {
+            const putResponse = await this.prismaClient.produto.update({
+                where: { id: produto.id },
+                data: {
+                    categoriaProdutoId: produto.categoriaProdutoId,
+                    descricao: produto.descricao,
+                    preco: produto.preco,
+                },
+            });
+
+            return {
+                id: putResponse.id,
+                categoriaProdutoId: produto.categoriaProdutoId,
+                descricao: produto.descricao,
+                preco: produto.preco,
+            } as Produto;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async delete(id: number): Promise<Produto> {
+        try {
+            const deleteResponse = await this.prismaClient.produto.delete({
+                where: {
+                    id: id,
+                },
+            });
+            return deleteResponse as Produto;
         } catch (error) {
             throw error;
         }

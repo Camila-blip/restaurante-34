@@ -19,8 +19,6 @@ class ClienteRoutes implements IClienteRoutes {
     }
 
     buildRoutes() {
-        console.log("BASE_URL", this.BASE_URL);
-        console.log("Building cliente routes");
         this.express
             .get(
                 "/cliente/:cpf/",

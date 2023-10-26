@@ -28,101 +28,143 @@ async function main() {
         },
     });
 
-    // Usuários
+    
+
+    // Clientes
+    const cliente1 = await prisma.usuario.upsert({
+        where: { id: 1 },
+        update: {},
+        create: {
+            tipoAcesso: clienteTipoAcesso.enumerador,
+            login: 'joao123',
+            senha: 'joaopass',
+            cliente: {
+                create: {
+                    nome: 'João Silva',
+                    email: 'joao123@example.com',
+                    cpf: Math.floor(Math.random() * 10000000000).toString(),
+                },
+            },
+        },
+    });
+
+    const cliente2 = await prisma.usuario.upsert({
+        where: { id: 2 },
+        update: {},
+        create: {
+            tipoAcesso: clienteTipoAcesso.enumerador,
+            login: 'maria456',
+            senha: 'mariapass',
+            cliente: {
+                create: {
+                    nome: 'Maria Santos',
+                    email: 'maria456@example.com',
+                    cpf: Math.floor(Math.random() * 10000000000).toString(),
+                },
+            },
+        },
+    });
+  
+    const cliente3 = await prisma.usuario.upsert({
+        where: { id: 3 },
+        update: {},
+        create: {
+            tipoAcesso: clienteTipoAcesso.enumerador,
+            login: 'pedro789',
+            senha: 'pedropass',
+            cliente: {
+                create: {
+                    nome: 'Pedro Oliveira',
+                    email: 'pedro789@example.com',
+                    cpf: Math.floor(Math.random() * 10000000000).toString(),
+                },
+            },
+        },
+    });
+  
+    const cliente4 = await prisma.usuario.upsert({
+        where: { id: 4 },
+        update: {},
+        create: {
+            tipoAcesso: clienteTipoAcesso.enumerador,
+            login: 'ana101',
+            senha: 'anapass',
+            cliente: {
+                create: {
+                    nome: 'Ana Rocha',
+                    email: 'ana101@example.com',
+                    cpf: Math.floor(Math.random() * 10000000000).toString(),
+                },
+            },
+        },
+    });
+
+    const cliente5 = await prisma.usuario.upsert({
+        where: { id: 5 },
+        update: {},
+        create: {
+            tipoAcesso: clienteTipoAcesso.enumerador,
+            login: 'ricardo2022',
+            senha: 'ricardopass',
+            cliente: {
+                create: {
+                    nome: 'Ricardo Sousa',
+                    email: 'ricardo2022@example.com',
+                    cpf: Math.floor(Math.random() * 10000000000).toString(),
+                },
+            },
+        },
+    });
+
+    // Admim
     const admin = await prisma.usuario.upsert({
         where: { login: 'admin', tipoAcesso: 'Admin' },
         update: {},
         create: {
-        tipoAcesso: 'Admin',
+        tipoAcesso: adminTipoAcesso.enumerador,
         login: 'admin',
         senha: 'adminpass',
         },
     });
 
-    const clientes = [  
-        {
-        nome: 'João Silva',
-        login: 'joao123',
-        senha: 'joaopass',
-        },
-        {
-        nome: 'Maria Santos',
-        login: 'maria456',
-        senha: 'mariapass',
-        },
-        {
-        nome: 'Pedro Oliveira',
-        login: 'pedro789',
-        senha: 'pedropass',
-        },
-        {
-        nome: 'Ana Rocha',
-        login: 'ana101',
-        senha: 'anapass',
-        },
-        {
-        nome: 'Ricardo Sousa',
-        login: 'ricardo2022',
-        senha: 'ricardopass',
-        },
-    ];
-
+    // Funcionários
     const funcionarios = [
         {
-        nome: 'Carlos Pereira',
-        login: 'carlos1',
-        senha: 'carlospass',
-        cargo: 'Atendente',
-        admin: 'Não',
+            nome: 'Carlos Pereira',
+            login: 'carlos1',
+            senha: 'carlospass',
+            cargo: 'Atendente',
+            admin: 'Não',
         },
         {
-        nome: 'Sandra Lima',
-        login: 'sandra2',
-        senha: 'sandrapass',
-        cargo: 'Gerente',
-        admin: 'Não',
+            nome: 'Sandra Lima',
+            login: 'sandra2',
+            senha: 'sandrapass',
+            cargo: 'Gerente',
+            admin: 'Não',
         },
         {
-        nome: 'Lucas Costa',
-        login: 'lucas3',
-        senha: 'lucaspass',
-        cargo: 'Técnico',
-        admin: 'Não',
+            nome: 'Lucas Costa',
+            login: 'lucas3',
+            senha: 'lucaspass',
+            cargo: 'Técnico',
+            admin: 'Não',
         },
         {
-        nome: 'Fernanda Oliveira',
-        login: 'fernanda4',
-        senha: 'fernandapass',
-        cargo: 'Atendente',
-        admin: 'Não',
+            nome: 'Fernanda Oliveira',
+            login: 'fernanda4',
+            senha: 'fernandapass',
+            cargo: 'Atendente',
+            admin: 'Não',
         },
-    ];
-
-    for (const cliente of clientes) {
-        await prisma.usuario.upsert({
-        where: { login: cliente.login, tipoAcesso: 'Cliente' },
-        update: {},
-        create: {
-            tipoAcesso: 'Cliente',
-            login: cliente.login,
-            senha: cliente.senha,
-            cliente: {
-            create: {
-                nome: cliente.nome,
-                email: `${cliente.login}@example.com`,
-                cpf: Math.floor(Math.random() * 10000000000).toString(),
-            },
-            },
-        },
-        });
-    }
+    ];    
 
     for (const funcionario of funcionarios) {
         await prisma.usuario.upsert({
         where: { login: funcionario.login, tipoAcesso: 'Funcionário' },
         update: {},
         create: {
-            tipoAcesso: 'Funcionário',
+            tipoAcesso: funcionarioTipoAcesso.enumerador,
             login: funcionario.login,
             senha: funcionario.senha,
             funcionario: {
@@ -226,7 +268,267 @@ async function main() {
         enumerador: 'Sobremesa',
         },
     });
-        
+
+    // Produtos
+    const produto1 = await prisma.produto.upsert({
+        where: { id: 1},
+        update: {},
+        create: {
+            descricao: 'Hamburguer de bacon',
+            preco: 10.99,
+            categoriaProdutoId: categoriaProduto1.id,
+        },
+    });
+
+    const produto2 = await prisma.produto.upsert({
+        where: { id: 2 },
+        update: {},
+        create: {
+            descricao: 'Hamburguer de costela',
+            preco: 12.99,
+            categoriaProdutoId: categoriaProduto1.id,
+        },
+    });
+
+    const produto3 = await prisma.produto.upsert({
+        where: { id: 3 },
+        update: {},
+        create: {
+            descricao: 'Hot dog',
+            preco: 7.99,
+            categoriaProdutoId: categoriaProduto1.id,
+        },
+    });
+
+    const produto4 = await prisma.produto.upsert({
+        where: { id: 4 },
+        update: {},
+        create: {
+            descricao: 'Batata frita rustica',
+            preco: 6.99,
+            categoriaProdutoId: categoriaProduto2.id,
+        },
+    });
+
+    const produto5 = await prisma.produto.upsert({
+        where: { id: 5 },
+        update: {},
+        create: {
+            descricao: 'Batata frita palito',
+            preco: 6.99,
+            categoriaProdutoId: categoriaProduto2.id,
+        },
+    });
+
+    const produto6 = await prisma.produto.upsert({
+        where: { id: 6 },
+        update: {},
+        create: {
+            descricao: 'Refrigerante lata',
+            preco: 5.99,
+            categoriaProdutoId: categoriaProduto3.id,
+        },
+    });
+
+    const produto7 = await prisma.produto.upsert({
+        where: { id: 7 },
+        update: {},
+        create: {
+            descricao: 'Refrigerante 600ml',
+            preco: 8.50,
+            categoriaProdutoId: categoriaProduto3.id,
+        },
+    });
+
+    // Cardápio
+    const cardapio = await prisma.cardapio.upsert({
+        where: { id: 1 },
+        update: {},
+        create: {
+            descricao: 'Cardápio Principal',
+            ativo: true,
+        },
+    });
+    
+    // Produtos do Cardápio (associando produtos existentes aos cardápios)
+    const produtosDoCardapio = [
+        { produtoId: produto1.id, cardapioId: cardapio.id },
+        { produtoId: produto2.id, cardapioId: cardapio.id },
+        { produtoId: produto3.id, cardapioId: cardapio.id },
+        { produtoId: produto4.id, cardapioId: cardapio.id },
+        { produtoId: produto5.id, cardapioId: cardapio.id },
+        { produtoId: produto6.id, cardapioId: cardapio.id },
+        { produtoId: produto7.id, cardapioId: cardapio.id }    
+    ];
+
+    for (const produtoDoCardapio of produtosDoCardapio) {
+        await prisma.produtosDoCardapio.upsert({
+            where: {
+                produtoId_cardapioId: {
+                    produtoId: produtoDoCardapio.produtoId,
+                    cardapioId: produtoDoCardapio.cardapioId,
+                },
+            },
+            update: {},
+            create: {
+                produtoId: produtoDoCardapio.produtoId,
+                cardapioId: produtoDoCardapio.cardapioId,
+            },
+        });
+    }
+
+    // Pedidos
+    const pedido1 = await prisma.pedido.upsert({
+        where: { id: 1 },
+        update: {},
+        create: {
+            clienteId: cliente1.id,
+            statusPedidoId: statusPedido1.id
+        },
+    });
+
+    const pedido2 = await prisma.pedido.upsert({
+        where: { id: 2 },
+        update: {},
+        create: {
+            clienteId: cliente2.id,
+            statusPedidoId: statusPedido1.id
+        },
+    });
+
+    const pedido3 = await prisma.pedido.upsert({
+        where: { id: 3 },
+        update: {},
+        create: {
+            clienteId: cliente3.id,
+            statusPedidoId: statusPedido3.id
+        },
+    });
+
+    const pedido4 = await prisma.pedido.upsert({
+        where: { id: 4 },
+        update: {},
+        create: {
+            clienteId: cliente4.id,
+            statusPedidoId: statusPedido4.id
+        },
+    });
+
+    const pedido5 = await prisma.pedido.upsert({
+        where: { id: 5 },
+        update: {},
+        create: {
+            clienteId: cliente5.id,
+            statusPedidoId: statusPedido2.id
+        },
+    });
+
+    // Produtos do Pedido
+    const produtosDoPedidoData = [
+        { produtoId: produto1.id, pedidoId: pedido1.id, quantidade: 1, valor: 10.99 },
+        { produtoId: produto4.id, pedidoId: pedido1.id, quantidade: 1, valor: 6.99 },
+        { produtoId: produto6.id, pedidoId: pedido1.id, quantidade: 1, valor: 5.99 }, //pedido 1 -> 23.97
+
+        { produtoId: produto5.id, pedidoId: pedido2.id, quantidade: 2, valor: 13.98 },
+        { produtoId: produto7.id, pedidoId: pedido2.id, quantidade: 1, valor: 8.50 }, //pedido 2 -> 22.48
+
+        { produtoId: produto2.id, pedidoId: pedido3.id, quantidade: 1, valor: 12.99 },
+        { produtoId: produto3.id, pedidoId: pedido3.id, quantidade: 1, valor: 7.99 },
+        { produtoId: produto4.id, pedidoId: pedido3.id, quantidade: 1, valor: 6.99 },
+        { produtoId: produto7.id, pedidoId: pedido3.id, quantidade: 1, valor: 8.50 }, //pedido 3 -> 36.47
+
+        { produtoId: produto6.id, pedidoId: pedido4.id, quantidade: 5, valor: 29.95 },
+        { produtoId: produto3.id, pedidoId: pedido4.id, quantidade: 5, valor: 39.95 }, //pedido 4 -> 69.90
+
+        { produtoId: produto7.id, pedidoId: pedido5.id, quantidade: 1, valor: 8.50 }, //pedido 5 -> 8.50
+    ]
+
+    for (const produtoDoPedidoData of produtosDoPedidoData) {
+        await prisma.produtosDoPedido.upsert({
+            where: {
+                produtoId_pedidoId: {
+                    produtoId: produtoDoPedidoData.produtoId,
+                    pedidoId: produtoDoPedidoData.pedidoId,
+                },
+            },
+            update: {},
+            create: produtoDoPedidoData,
+        });
+    }
+
+    // Pagamento
+    const pagamento1 = await prisma.pagamento.upsert({
+        where: { id: 1 },
+        update: {},
+        create: {
+            pedidoId: pedido1.id,
+            statusPagamentoId: statusPagamento1.id,
+            tipo: 'Cartão de Crédito',
+            data: new Date(),
+            valor: 23.97,
+        },
+    });
+
+    const pagamento2 = await prisma.pagamento.upsert({
+        where: { id: 2 },
+        update: {},
+        create: {
+            pedidoId: pedido2.id, // Pedido aguardando
+            statusPagamentoId: statusPagamento3.id, // Não Pago
+            tipo: 'Cartão de Débito',
+            data: new Date(),
+            valor: 22.48,
+        },
+    });
+
+    const pagamento3 = await prisma.pagamento.upsert({
+        where: { id: 3 },
+        update: {},
+        create: {
+            pedidoId: pedido2.id, // Pedido aguardando
+            statusPagamentoId: statusPagamento2.id, // Pago
+            tipo: 'Cartão de Débito',
+            data: new Date(),
+            valor: 22.48,
+        },
+    });
+
+    const pagamento4 = await prisma.pagamento.upsert({
+        where: { id: 4 },
+        update: {},
+        create: {
+            pedidoId: pedido3.id,
+            statusPagamentoId: statusPagamento2.id,
+            tipo: 'Pix',
+            data: new Date(),
+            valor: 36.47,
+        },
+    });
+
+    const pagamento5 = await prisma.pagamento.upsert({
+        where: { id: 5 },
+        update: {},
+        create: {
+            pedidoId: pedido4.id,
+            statusPagamentoId: statusPagamento2.id,
+            tipo: 'Dinheiro',
+            data: new Date(),
+            valor: 69.90,
+        },
+    });
+
+    const pagamento6 = await prisma.pagamento.upsert({
+        where: { id: 6 },
+        update: {},
+        create: {
+            pedidoId: pedido5.id,
+            statusPagamentoId: statusPagamento2.id,
+            tipo: 'Cartão de Crédito',
+            data: new Date(),
+            valor: 8.50,
+        },
+    });
+
     console.log('Seed data upserted.');
 }
 
