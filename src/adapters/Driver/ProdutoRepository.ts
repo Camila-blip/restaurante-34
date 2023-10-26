@@ -8,8 +8,18 @@ class ProdutoRepository implements IProdutoRepository {
     constructor(prismaClient: PrismaClient) {
         this.prismaClient = prismaClient;
     }
-    put(produto: Produto): Promise<Produto> {
-        throw new Error("Method not implemented.");
+
+    async get(categoriaProdutoId: number): Promise<Produto[]> {
+        try {
+            const getResponse = await this.prismaClient.produto.findMany({
+                where: {
+                    categoriaProdutoId: categoriaProdutoId,
+                },
+            });
+            return getResponse as Produto[];
+        } catch (error) {
+            throw error;
+        }
     }
     async create(produto: Produto): Promise<Produto> {
         try {

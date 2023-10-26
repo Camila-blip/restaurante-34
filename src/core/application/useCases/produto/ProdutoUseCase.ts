@@ -9,6 +9,19 @@ export class CreateProdutoUseCase implements IProdutoUseCase {
         this.produtoRepository = produtoRepository;
     }
 
+    async executeGetProdutoCategoria(
+        categoriaProdutoId: number
+    ): Promise<Produto[]> {
+        try {
+            const getCategoria = await this.produtoRepository.get(
+                categoriaProdutoId
+            );
+
+            return getCategoria;
+        } catch (error) {
+            throw error;
+        }
+    }
     async executeCreation(produtoData: Produto): Promise<Produto> {
         try {
             const novoCliente = await this.produtoRepository.create(

@@ -10,7 +10,17 @@ export default class ProdutoController implements IProdutoController {
     }
 
     async getProdutosCategoria(req: Request, res: Response) {
-        console.log("aqui");
+        const { categoriaProdutoId } = req.params;
+        try {
+            const getProduto =
+                await this.createProdutoUseCase.executeGetProdutoCategoria(
+                    parseInt(categoriaProdutoId, 10)
+                );
+
+            return res.status(200).json(getProduto);
+        } catch (error: any) {
+            return res.status(400).json({ message: error?.message });
+        }
     }
 
     async createProduto(req: Request, res: Response) {
