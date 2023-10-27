@@ -31,11 +31,11 @@ class PedidoRoutes implements IpedidoRoutes {
             `${this.BASE_URL}/pedido/:idPedido/produto`,
             this.pedidoController.removeProdutoAoPedido.bind(this.pedidoController)
         )
-        .get(
+        this.express.get(
             `${this.BASE_URL}/pedidos`,
             this.pedidoController.getPedidos.bind(this.pedidoController)
         )
-        .get(
+        this.express.get(
             `${this.BASE_URL}/pedido/:idPedido`,
             this.pedidoController.getPedidoById.bind(this.pedidoController)
         )

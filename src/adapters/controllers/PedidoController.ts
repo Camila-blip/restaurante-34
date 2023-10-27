@@ -25,7 +25,8 @@ class PedidoController implements IPedidoController{
     const { idPedido } = req.params;
 
     try{
-      this.pedidoUseCase.executeGetPedidoById(parseInt(idPedido));
+      const pedido = await this.pedidoUseCase.executeGetPedidoById(parseInt(idPedido))
+      return res.status(200).json({ message: '', pedido });
     }
     catch(error: any){
       return res.status(400).json({ message: error?.message });
@@ -34,10 +35,11 @@ class PedidoController implements IPedidoController{
   }
 
   async getPedidos(req: Request, res: Response) {
-    const { status } = req.params;
-
     try {
-      this.pedidoUseCase.executeGetPedidos(status);
+
+      const pedido = await this.pedidoUseCase.executeGetPedidos()
+
+      return res.status(200).json({ message: '', pedido })
     } catch (error: any) {
       return res.status(400).json({ message: error?.message });
     }

@@ -6,6 +6,8 @@ class Pedido {
         public id: number,
         public statusPedidoId: number,
         public clienteId: number,
+        public createdAt: Date,
+        public updateAt: Date,
     ) {}
 }
 

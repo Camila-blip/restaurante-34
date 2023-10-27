@@ -17,7 +17,7 @@ class PedidoUseCase implements IPedidoUseCase {
   async executeCreation(clienteData: Pedido) {
     clienteData.statusPedidoId = 1;
     try{
-      const response = await this.pedidoRepository.create(clienteData);
+      const response = await this.pedidoRepository.getPedidos();
 
       return response;
     }
@@ -43,12 +43,26 @@ class PedidoUseCase implements IPedidoUseCase {
     throw new Error("Method executeUpdatePedidoPreparacao not implemented.");
   }
 
-  executeGetPedidoById(idPedido: number) {
-    throw new Error("Method executeGetPedidoById not implemented.");
+  async executeGetPedidoById(idPedido: number) {
+    try{
+      const response = await this.pedidoRepository.getPedidoById(idPedido);
+
+      return response;
+    }
+    catch(error){
+      throw error;
+    };
   }
 
-  executeGetPedidos(status: string) {
-    throw new Error("Method executeGetPedidos not implemented.");
+  async executeGetPedidos() {
+    try{
+      const response = await this.pedidoRepository.getPedidos();
+
+      return response;
+    }
+    catch(error){
+      throw error;
+    };
   }
 
   executeUpdatePedidoPronto(idPedido: number) {
