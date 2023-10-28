@@ -1,7 +1,8 @@
 import { IPedidoRepository } from "@/core/ports/IPedidoRepository";
 import { IPedidoUseCase } from "./IPedidoUseCase";
 import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
-import Pedido from "@/core/domain/Entities/pedido";
+import { Pedido } from "@prisma/client";
+
 
 
 class PedidoUseCase implements IPedidoUseCase {
@@ -17,7 +18,7 @@ class PedidoUseCase implements IPedidoUseCase {
   async executeCreation(clienteData: Pedido) {
     clienteData.statusPedidoId = 1;
     try{
-      const response = await this.pedidoRepository.create(clienteData)
+      const response = await this.pedidoRepository.create(clienteData);
 
       return response;
     }
@@ -41,7 +42,7 @@ class PedidoUseCase implements IPedidoUseCase {
 
   async executeUpdatePedidoPreparacao(idPedido: number) {
     try {
-      const response = await this.pedidoRepository.updatePedido(idPedido, "Em Preparação");
+      const response = await this.pedidoRepository.updatePedido(idPedido, "Em preparação");
 
       return response;
     } catch (error){
