@@ -11,4 +11,5 @@ export interface IPedidoUseCase{
   executeUpdatePedidoAguardandoPagamento(idPedido: number): any;
   executeUpdatePedidoPronto(idPedido: number): any;
   executeUpdatePedidoFinalizado(idPedido: number): any;
+  executeGePedidoByStatus(status: string): any;
 }

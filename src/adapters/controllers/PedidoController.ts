@@ -34,6 +34,19 @@ class PedidoController implements IPedidoController{
 
   }
 
+  async getPedidoByStatus(req: Request, res: Response) {
+    const { status } = req.params;
+
+    try{
+      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status)
+      return res.status(200).json({ message: '', pedido });
+    }
+    catch(error: any){
+      return res.status(400).json({ message: error?.message });
+    }
+
+  }
+
   async getPedidos(req: Request, res: Response) {
     try {
 

@@ -39,6 +39,10 @@ class PedidoRoutes implements IpedidoRoutes {
             `${this.BASE_URL}/pedido/:idPedido`,
             this.pedidoController.getPedidoById.bind(this.pedidoController)
         )
+        this.express.get(
+            `${this.BASE_URL}/pedido/status/:status`,
+            this.pedidoController.getPedidoByStatus.bind(this.pedidoController)
+        )
         .patch(
             `${this.BASE_URL}/pedido/:idPedido/alterar-status`,
             this.pedidoController.updatePedido.bind(this.pedidoController)

@@ -65,6 +65,17 @@ class PedidoUseCase implements IPedidoUseCase {
     };
   }
 
+  async executeGePedidoByStatus(status: string) {
+    try{
+      const response = await this.pedidoRepository.getPedidosByStatus(status);
+
+      return response;
+    }
+    catch(error){
+      throw error;
+    };
+  }
+
   executeUpdatePedidoPronto(idPedido: number) {
     throw new Error("Method executeUpdatePedidoPronto not implemented.");
   }

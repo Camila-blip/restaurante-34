@@ -54,15 +54,39 @@ class PedidoRepository implements IPedidoRepository{
       } catch (error) {
         throw error;
       }
-
     }
 
     updatePedido(id: number, status: string){
       return Promise.resolve({} as Pedido);
     }
 
-    getPedidosByStatus(status: string){
-      return Promise.resolve({} as Pedido[]);
+    async getPedidosByStatus(status: string){
+      try {
+        const pedido_response =  await this.prismaClient.pedido.findMany({
+          where: {
+            statusPedido: {
+              enumerador: {
+                equals: status
+              }
+            }
+          },
+          include: {
+            cliente: {
+              select: {
+                nome: true
+              }
+            },
+            statusPedido: {
+              select: {
+                enumerador: true
+              }
+            }
+          }
+        });
+        return pedido_response;
+      } catch (error) {
+        throw error;
+      };
     }
 
 }
