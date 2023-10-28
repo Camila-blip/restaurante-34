@@ -1,4 +1,5 @@
-import Pedido from "@/core/domain/Entities/Pedido";
+import { Pedido } from "@prisma/client";
+
 
 export interface IPedidoUseCase{
   executeCreation(pedidoData: Pedido): any;

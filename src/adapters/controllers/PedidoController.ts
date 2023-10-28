@@ -26,7 +26,7 @@ class PedidoController implements IPedidoController{
 
     try{
       const pedido = await this.pedidoUseCase.executeGetPedidoById(parseInt(idPedido))
-      return res.status(200).json({ message: '', pedido });
+      return res.status(200).json({  pedido });
     }
     catch(error: any){
       return res.status(400).json({ message: error?.message });
@@ -39,7 +39,20 @@ class PedidoController implements IPedidoController{
 
     try{
       const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status)
-      return res.status(200).json({ message: '', pedido });
+      return res.status(200).json({  pedido });
+    }
+    catch(error: any){
+      return res.status(400).json({ message: error?.message });
+    }
+
+  }
+
+  async getPedidoByStatusFakeCheckout(req: Request, res: Response) {
+    const status = "Em preparação";
+
+    try{
+      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status)
+      return res.status(200).json({ pedido });
     }
     catch(error: any){
       return res.status(400).json({ message: error?.message });
@@ -52,7 +65,7 @@ class PedidoController implements IPedidoController{
 
       const pedido = await this.pedidoUseCase.executeGetPedidos()
 
-      return res.status(200).json({ message: '', pedido })
+      return res.status(200).json({ pedido })
     } catch (error: any) {
       return res.status(400).json({ message: error?.message });
     }
@@ -111,7 +124,7 @@ class PedidoController implements IPedidoController{
       const updateFunction = updatePedidoDict[statusPedido];
       const update = await updateFunction(parseInt(idPedido));
 
-      return res.status(200).json({ message: "Update realizado com sucesso", update});
+      return res.status(200).json({ update});
     } catch (error: any) {
 
       return res.status(400).json({ message: error?.message });

@@ -29,7 +29,7 @@ class PedidoRepository implements IPedidoRepository{
             id: id
           }
         });
-        return pedido_response;
+        return pedido_response || {} as Pedido;
       } catch (error) {
         throw error;
       };
@@ -57,10 +57,40 @@ class PedidoRepository implements IPedidoRepository{
     }
 
     updatePedido(id: number, status: string){
+      
       return Promise.resolve({} as Pedido);
     }
 
     async getPedidosByStatus(status: string){
+      try {
+        const pedido_response =  await this.prismaClient.pedido.findMany({
+          where: {
+            statusPedido: {
+              enumerador: {
+                equals: status
+              }
+            }
+          },
+          include: {
+            cliente: {
+              select: {
+                nome: true
+              }
+            },
+            statusPedido: {
+              select: {
+                enumerador: true
+              }
+            }
+          }
+        });
+        return pedido_response;
+      } catch (error) {
+        throw error;
+      };
+    }
+
+    async getPedidoByStatusFakeCheckout(status: string){
       try {
         const pedido_response =  await this.prismaClient.pedido.findMany({
           where: {

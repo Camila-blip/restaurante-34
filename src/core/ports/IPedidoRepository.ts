@@ -1,4 +1,5 @@
-import Pedido from "@/core/domain/Entities/pedido";
+import { Pedido } from "@prisma/client";
+
 export interface IPedidoRepository {
     create(pedido: Pedido): Promise<Pedido>;
     getPedidoById(id: number): Promise<Pedido>;

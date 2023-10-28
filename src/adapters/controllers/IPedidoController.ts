@@ -8,4 +8,5 @@ export interface IPedidoController{
     removeProdutoAoPedido(req: Request, res: Response): any;
     updatePedido(req: Request, res: Response): any;
     getPedidoByStatus(req: Request, res: Response): any;
+    getPedidoByStatusFakeCheckout(req: Request, res: Response): any;
 }
