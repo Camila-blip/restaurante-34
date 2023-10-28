@@ -1,5 +1,7 @@
 import { Cliente } from "./Cliente";
-import { Produto } from "./Produto";
+import { Produto } from "../Entities/produto";
+import ProdutosDoPedido from "@/adapters/Driver/ProdutosDoPedido";
+import { Pagamento } from "@prisma/client";
 
 class Pedido {
     constructor(
@@ -8,6 +10,10 @@ class Pedido {
         public clienteId: number,
         public createdAt: Date,
         public updateAt: Date,
+        public cliente: Cliente,
+        public pagamento: Pagamento[],
+        public statusPedido: StatusPedido,
+        public produtosDoPedido: ProdutosDoPedido[],
     ) {}
 }
 

@@ -16,8 +16,7 @@ class ClienteRepository implements IClienteRepository {
                 nome: cliente.nome,
                 cpf: cliente.cpf,
                 email: cliente.email,
-                createdAt: cliente.createdAt,
-                updatedAt: cliente.updateAt,
+               
                 usuarioId: cliente.usuarioId,
             },
         });
@@ -27,8 +26,7 @@ class ClienteRepository implements IClienteRepository {
             nome: creationResponse.nome,
             cpf: creationResponse.cpf,
             email: creationResponse.email,
-            createdAt: creationResponse.createdAt,
-            updateAt: creationResponse.updatedAt,
+         
             usuarioId: creationResponse.usuarioId
         } as Cliente;
       } catch (error) {
@@ -53,8 +51,7 @@ class ClienteRepository implements IClienteRepository {
         nome: foundCliente.nome,
         cpf: foundCliente.cpf,
         email: foundCliente.email,
-        createdAt: foundCliente.createdAt,
-        updateAt: foundCliente.createdAt,
+      
         usuarioId: foundCliente.usuarioId
       } as Cliente;
     
@@ -77,8 +74,7 @@ class ClienteRepository implements IClienteRepository {
         nome: foundCliente.nome,
         cpf: foundCliente.cpf,
         email: foundCliente.email,
-        createdAt: foundCliente.createdAt,
-        updateAt: foundCliente.createdAt,
+        
         usuarioId: foundCliente.usuarioId
       } as Cliente;
     

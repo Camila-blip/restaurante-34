@@ -1,13 +1,13 @@
-import { Pedido } from "@prisma/client";
+import { Pedido, Usuario } from "@prisma/client";
 
 export interface Cliente {
     id: number;
-    nome: string;
-    cpf: string;
+    usuarioId: number;
+    usuario:Usuario;
+    pedido: Pedido[];
+    nome?: string | null;
     email: string;
+    cpf: string;
     createdAt: Date;
     updateAt: Date;
-    usuarioId: number;
-    usuario: Usuario;
-    pedido: Pedido;
 }
