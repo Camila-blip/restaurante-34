@@ -1,3 +1,5 @@
+import { Pedido } from "@prisma/client";
+
 class Pagamento {
     constructor(
         public id: number,
@@ -5,6 +7,11 @@ class Pagamento {
         public tipo: string,
         public data: Date,
         public valor: number,
-        public pedido: number
+        public pedido: Pedido,
+        public statusPagamentoId: number,
+        public statusPagamento: StatusPagamento,
+        public pedidoId: number,
+        public createdAt: Date,
+        public updatedAt: Date,
     ) {}
 }

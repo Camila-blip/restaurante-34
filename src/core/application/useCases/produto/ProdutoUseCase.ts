@@ -1,4 +1,4 @@
-import { Produto } from "@/core/domain/Entities/Produto";
+import { Produto } from "../../../domain/Entities/produto";
 import { IProdutoRepository } from "@/core/ports/IProdutoRepository";
 import { IProdutoUseCase } from "./IProdutoUseCase";
 
