@@ -352,21 +352,22 @@ async function main() {
     
     // Produtos do Cardápio (associando produtos existentes aos cardápios)
     const produtosDoCardapio = [
-        { produtoId: produto1.id, cardapioId: cardapio.id },
-        { produtoId: produto2.id, cardapioId: cardapio.id },
-        { produtoId: produto3.id, cardapioId: cardapio.id },
-        { produtoId: produto4.id, cardapioId: cardapio.id },
-        { produtoId: produto5.id, cardapioId: cardapio.id },
-        { produtoId: produto6.id, cardapioId: cardapio.id },
-        { produtoId: produto7.id, cardapioId: cardapio.id }    
+        {id:1, produtoId: produto1.id, cardapioId: cardapio.id },
+        {id:2, produtoId: produto2.id, cardapioId: cardapio.id },
+        {id:3, produtoId: produto3.id, cardapioId: cardapio.id },
+        {id:4, produtoId: produto4.id, cardapioId: cardapio.id },
+        {id:5, produtoId: produto5.id, cardapioId: cardapio.id },
+        {id:6, produtoId: produto6.id, cardapioId: cardapio.id },
+        {id:7, produtoId: produto7.id, cardapioId: cardapio.id }    
     ];
 
     for (const produtoDoCardapio of produtosDoCardapio) {
         await prisma.produtosDoCardapio.upsert({
             where: {
-                produtoId_cardapioId: {
+                produtoId_cardapioId_id: {
                     produtoId: produtoDoCardapio.produtoId,
                     cardapioId: produtoDoCardapio.cardapioId,
+                    id: produtoDoCardapio.id,
                 },
             },
             update: {},
@@ -425,30 +426,31 @@ async function main() {
 
     // Produtos do Pedido
     const produtosDoPedidoData = [
-        { produtoId: produto1.id, pedidoId: pedido1.id, quantidade: 1, valor: 10.99 },
-        { produtoId: produto4.id, pedidoId: pedido1.id, quantidade: 1, valor: 6.99 },
-        { produtoId: produto6.id, pedidoId: pedido1.id, quantidade: 1, valor: 5.99 }, //pedido 1 -> 23.97
+        {id: 1, produtoId: produto1.id, pedidoId: pedido1.id, quantidade: 1, valor: 10.99 },
+        {id: 2, produtoId: produto4.id, pedidoId: pedido1.id, quantidade: 1, valor: 6.99 },
+        {id: 3, produtoId: produto6.id, pedidoId: pedido1.id, quantidade: 1, valor: 5.99 }, //pedido 1 -> 23.97
 
-        { produtoId: produto5.id, pedidoId: pedido2.id, quantidade: 2, valor: 13.98 },
-        { produtoId: produto7.id, pedidoId: pedido2.id, quantidade: 1, valor: 8.50 }, //pedido 2 -> 22.48
+        {id: 4, produtoId: produto5.id, pedidoId: pedido2.id, quantidade: 2, valor: 13.98 },
+        {id: 5, produtoId: produto7.id, pedidoId: pedido2.id, quantidade: 1, valor: 8.50 }, //pedido 2 -> 22.48
 
-        { produtoId: produto2.id, pedidoId: pedido3.id, quantidade: 1, valor: 12.99 },
-        { produtoId: produto3.id, pedidoId: pedido3.id, quantidade: 1, valor: 7.99 },
-        { produtoId: produto4.id, pedidoId: pedido3.id, quantidade: 1, valor: 6.99 },
-        { produtoId: produto7.id, pedidoId: pedido3.id, quantidade: 1, valor: 8.50 }, //pedido 3 -> 36.47
+        {id: 6, produtoId: produto2.id, pedidoId: pedido3.id, quantidade: 1, valor: 12.99 },
+        {id: 7, produtoId: produto3.id, pedidoId: pedido3.id, quantidade: 1, valor: 7.99 },
+        {id: 8, produtoId: produto4.id, pedidoId: pedido3.id, quantidade: 1, valor: 6.99 },
+        {id: 9, produtoId: produto7.id, pedidoId: pedido3.id, quantidade: 1, valor: 8.50 }, //pedido 3 -> 36.47
 
-        { produtoId: produto6.id, pedidoId: pedido4.id, quantidade: 5, valor: 29.95 },
-        { produtoId: produto3.id, pedidoId: pedido4.id, quantidade: 5, valor: 39.95 }, //pedido 4 -> 69.90
+        {id: 10, produtoId: produto6.id, pedidoId: pedido4.id, quantidade: 5, valor: 29.95 },
+        {id: 11, produtoId: produto3.id, pedidoId: pedido4.id, quantidade: 5, valor: 39.95 }, //pedido 4 -> 69.90
 
-        { produtoId: produto7.id, pedidoId: pedido5.id, quantidade: 1, valor: 8.50 }, //pedido 5 -> 8.50
+        {id: 12, produtoId: produto7.id, pedidoId: pedido5.id, quantidade: 1, valor: 8.50 }, //pedido 5 -> 8.50
     ]
 
     for (const produtoDoPedidoData of produtosDoPedidoData) {
         await prisma.produtosDoPedido.upsert({
             where: {
-                produtoId_pedidoId: {
+                produtoId_pedidoId_id: {
                     produtoId: produtoDoPedidoData.produtoId,
                     pedidoId: produtoDoPedidoData.pedidoId,
+                    id: produtoDoPedidoData.id,
                 },
             },
             update: {},

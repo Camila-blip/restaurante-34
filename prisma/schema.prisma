@@ -85,7 +85,8 @@ model Cardapio{
 }
 
 model ProdutosDoPedido{
-  @@id([ produtoId, pedidoId ])
+  @@id([ produtoId, pedidoId, id])
+  id Int @default(autoincrement())
   produtoId Int
   produto Produto @relation(fields: [produtoId], references: [id])
   pedidoId Int
@@ -130,7 +131,8 @@ model CategoriaProduto{
 }
 
 model ProdutosDoCardapio {
-  @@id([ produtoId, cardapioId])
+  @@id([ produtoId, cardapioId, id])
+  id Int @default(autoincrement())
   produto Produto @relation(fields: [produtoId], references: [id])
   produtoId Int 
   cardapio Cardapio @relation(fields: [cardapioId], references: [id])
