@@ -9,7 +9,6 @@ export interface IPedidoUseCase{
   executeAddProdutoAoPedido(idPedido: number, idProdutos: number[]): any;
   executeRemoveProdutoAoPedido(idPedido: number, idProdutos: number[]): any;
   executeUpdatePedidoPreparacao(idPedido: number): any;
-  executeUpdatePedidoAguardandoPagamento(idPedido: number): any;
   executeUpdatePedidoPronto(idPedido: number): any;
   executeUpdatePedidoFinalizado(idPedido: number): any;
   executeGePedidoByStatus(status: string): any;

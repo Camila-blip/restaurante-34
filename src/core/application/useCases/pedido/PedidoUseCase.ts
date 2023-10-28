@@ -32,12 +32,15 @@ class PedidoUseCase implements IPedidoUseCase {
     throw new Error("Method executeDelete not implemented.");
   }
 
-  executeUpdatePedidoAguardandoPagamento(idPedido: number) {
-    throw new Error("Method executeUpdatePedidoAguardandoPagamento not implemented.");
-  }
+  async executeUpdatePedidoFinalizado(idPedido: number) {
+    try {
+      const response = await this.pedidoRepository.updatePedido(idPedido, "Finalizado");
 
-  executeUpdatePedidoFinalizado(idPedido: number) {
-    throw new Error("Method executeUpdatePedidoFinalizado not implemented.");
+      return response;
+    } catch (error){
+
+      throw error;
+    }
   }
 
   async executeUpdatePedidoPreparacao(idPedido: number) {
@@ -84,8 +87,15 @@ class PedidoUseCase implements IPedidoUseCase {
     }
   }
 
-  executeUpdatePedidoPronto(idPedido: number) {
-    throw new Error("Method executeUpdatePedidoPronto not implemented.");
+  async executeUpdatePedidoPronto(idPedido: number) {
+    try {
+      const response = await this.pedidoRepository.updatePedido(idPedido, "Pronto");
+
+      return response;
+    } catch (error){
+
+      throw error;
+    }
   }
 
   executeAddProdutoAoPedido(idPedido: number, idProdutos: number[]) {

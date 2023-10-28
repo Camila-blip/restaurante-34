@@ -107,7 +107,6 @@ class PedidoController implements IPedidoController{
       "Em Preparação": this.pedidoUseCase.executeUpdatePedidoPreparacao.bind(this.pedidoUseCase),
       "Pronto": this.pedidoUseCase.executeUpdatePedidoPronto.bind(this.pedidoUseCase),
       "Finalizado": this.pedidoUseCase.executeUpdatePedidoFinalizado.bind(this.pedidoUseCase),
-      "Aguardando Pagamento": this.pedidoUseCase.executeUpdatePedidoAguardandoPagamento.bind(this.pedidoUseCase),
     };
 
 
