@@ -25,7 +25,7 @@ class PedidoController implements IPedidoController{
     const { idPedido } = req.params;
 
     try{
-      const pedido = await this.pedidoUseCase.executeGetPedidoById(parseInt(idPedido))
+      const pedido = await this.pedidoUseCase.executeGetPedidoById(parseInt(idPedido));
       return res.status(200).json({  pedido });
     }
     catch(error: any){
@@ -38,7 +38,7 @@ class PedidoController implements IPedidoController{
     const { status } = req.params;
 
     try{
-      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status)
+      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status);
       return res.status(200).json({  pedido });
     }
     catch(error: any){
@@ -51,7 +51,7 @@ class PedidoController implements IPedidoController{
     const status = "Em preparação";
 
     try{
-      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status)
+      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status);
       return res.status(200).json({ pedido });
     }
     catch(error: any){
@@ -63,9 +63,9 @@ class PedidoController implements IPedidoController{
   async getPedidos(req: Request, res: Response) {
     try {
 
-      const pedido = await this.pedidoUseCase.executeGetPedidos()
+      const pedido = await this.pedidoUseCase.executeGetPedidos();
 
-      return res.status(200).json({ pedido })
+      return res.status(200).json({ pedido });
     } catch (error: any) {
       return res.status(400).json({ message: error?.message });
     }
@@ -104,10 +104,10 @@ class PedidoController implements IPedidoController{
     };
 
     const updatePedidoDict: UpdatePedidoDict = {
-      "Em Preparação": this.pedidoUseCase.executeUpdatePedidoPreparacao,
-      "Pronto": this.pedidoUseCase.executeUpdatePedidoPronto,
-      "Finalizado": this.pedidoUseCase.executeUpdatePedidoFinalizado,
-      "Aguardando Pagamento": this.pedidoUseCase.executeUpdatePedidoAguardandoPagamento,
+      "Em Preparação": this.pedidoUseCase.executeUpdatePedidoPreparacao.bind(this.pedidoUseCase),
+      "Pronto": this.pedidoUseCase.executeUpdatePedidoPronto.bind(this.pedidoUseCase),
+      "Finalizado": this.pedidoUseCase.executeUpdatePedidoFinalizado.bind(this.pedidoUseCase),
+      "Aguardando Pagamento": this.pedidoUseCase.executeUpdatePedidoAguardandoPagamento.bind(this.pedidoUseCase),
     };
 
 
