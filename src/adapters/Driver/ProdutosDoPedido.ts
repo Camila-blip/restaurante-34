@@ -1,3 +1,4 @@
+import { Produto } from "@/core/domain/Entities/produto";
 import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
 import { PrismaClient } from "@prisma/client";
 
@@ -9,12 +10,31 @@ class ProdutosDoPedido implements IProdutosDoPedidoRepository{
     this.prismaClient = prismaClient;
   }
 
-  create(idProduto: number, idPedido: number): Promise<void> {
-    return Promise.resolve();
+  async create(idPedido: number, produtos: Produto[]) {
+    try {
+      const response = await this.prismaClient.produtosDoPedido.createMany({
+        data: produtos.map(({
+          id,
+          quantidade,
+          valor
+        }) =>  {
+          return {
+            pedidoId: idPedido,
+            produtoId: id,
+            quantidade: quantidade,
+            valor: valor
+          };
+        })
+      });
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  delete(idProduto: number, idPedido: number): Promise<void> {
-    return Promise.resolve();
+  delete(idPedido: number, produtos: Produto[]) {
+    return Promise.resolve({} as ProdutosDoPedido);
   }
 }
 

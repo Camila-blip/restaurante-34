@@ -1,7 +1,7 @@
 import { IPedidoRepository } from "@/core/ports/IPedidoRepository";
 import { IPedidoUseCase } from "./IPedidoUseCase";
 import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
-import { Pedido } from "@prisma/client";
+import { Pedido, Produto } from "@prisma/client";
 
 
 
@@ -98,11 +98,17 @@ class PedidoUseCase implements IPedidoUseCase {
     }
   }
 
-  executeAddProdutoAoPedido(idPedido: number, idProdutos: number[]) {
-    throw new Error("Method executeAddProdutoAoPedido not implemented.");
+  executeAddProdutoAoPedido(idPedido: number, produtos: Produto[]) {
+    try {
+      const response = this.produtosDoPedidoRepository.create(idPedido, produtos);
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  executeRemoveProdutoAoPedido(idPedido: number, idProdutos: number[]) {
+  executeRemoveProdutoDoPedido(idPedido: number, idProdutos: number) {
     throw new Error("Method executeRemoveProdutoAoPedido not implemented.");
   }
 }

@@ -29,7 +29,7 @@ class PedidoRoutes implements IpedidoRoutes {
         )
         .delete(
             `${this.BASE_URL}/pedido/:idPedido/produto`,
-            this.pedidoController.removeProdutoAoPedido.bind(this.pedidoController)
+            this.pedidoController.removeProdutoDoPedido.bind(this.pedidoController)
         )
         .get(
             `${this.BASE_URL}/pedidos`,

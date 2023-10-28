@@ -76,18 +76,20 @@ class PedidoController implements IPedidoController{
     const { idPedido } = req.params;
 
     try {
-      this.pedidoUseCase.executeAddProdutoAoPedido(parseInt(idPedido), listaProdutos);
+      const quantidadeProdutosAdicionados = await this.pedidoUseCase.executeAddProdutoAoPedido(parseInt(idPedido), listaProdutos);
+
+      return res.status(200).json({ quantidadeProdutosAdicionados });
     } catch (error: any) {
       return res.status(400).json({ message: error?.message });
     }
   }
 
-  async removeProdutoAoPedido(req: Request, res: Response) {
+  async removeProdutoDoPedido(req: Request, res: Response) {
     const { listaProdutos } = req.body;
     const { idPedido } = req.params;
 
     try {
-      this.pedidoUseCase.executeRemoveProdutoAoPedido(parseInt(idPedido), listaProdutos);
+      this.pedidoUseCase.executeRemoveProdutoDoPedido(parseInt(idPedido), listaProdutos);
     } catch (error: any) {
       return res.status(400).json({ message: error?.message });
     }

@@ -10,6 +10,8 @@ export interface Produto {
     produtosDoCardapio: ProdutosDoCardapio[];
     produtosDoPedido: ProdutosDoPedido[];
     categoriaProduto: CategoriaProduto;
+    quantidade: number, 
+    valor: number
     createdAt: Date;
     updatedAt: Date;
 }
