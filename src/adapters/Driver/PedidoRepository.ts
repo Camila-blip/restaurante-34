@@ -10,33 +10,33 @@ class PedidoRepository implements IPedidoRepository{
 
     async create(pedido: Pedido){
       try {
-        const pedido_response =  await this.prismaClient.pedido.create({
+        const pedidoResponse =  await this.prismaClient.pedido.create({
           data: {
             statusPedidoId: pedido.statusPedidoId,
             clienteId: pedido.clienteId
           }
         });
 
-        return pedido_response;
+        return pedidoResponse;
       } catch (error) {
         throw error;
       }
     }
     async getPedidoById(id: number){
       try {
-        const pedido_response =  await this.prismaClient.pedido.findUnique({
+        const pedidoResponse =  await this.prismaClient.pedido.findUnique({
           where: {
             id: id
           }
         });
-        return pedido_response || {} as Pedido;
+        return pedidoResponse || {} as Pedido;
       } catch (error) {
         throw error;
-      };
+      }
     }
     async getPedidos(){
       try {
-        const pedido_response =  await this.prismaClient.pedido.findMany({
+        const pedidoResponse =  await this.prismaClient.pedido.findMany({
           include: {
             statusPedido: {
               select: {
@@ -50,20 +50,36 @@ class PedidoRepository implements IPedidoRepository{
             }
           }
         });
-        return pedido_response;
+        return pedidoResponse;
       } catch (error) {
         throw error;
       }
     }
 
-    updatePedido(id: number, status: string){
-      
-      return Promise.resolve({} as Pedido);
+    async updatePedido(id: number, status: string){
+      try {
+        const pedidoResponse = await this.prismaClient.pedido.update({
+          where: {
+            id: id
+          },
+          data: {
+            statusPedido: {
+              connect: {
+                enumerador: status
+              }
+            }
+          }
+        });
+
+        return pedidoResponse;
+      } catch (error) {
+        throw error;
+      }
     }
 
     async getPedidosByStatus(status: string){
       try {
-        const pedido_response =  await this.prismaClient.pedido.findMany({
+        const pedidoResponse =  await this.prismaClient.pedido.findMany({
           where: {
             statusPedido: {
               enumerador: {
@@ -84,15 +100,15 @@ class PedidoRepository implements IPedidoRepository{
             }
           }
         });
-        return pedido_response;
+        return pedidoResponse;
       } catch (error) {
         throw error;
-      };
+      }
     }
 
     async getPedidoByStatusFakeCheckout(status: string){
       try {
-        const pedido_response =  await this.prismaClient.pedido.findMany({
+        const pedidoResponse =  await this.prismaClient.pedido.findMany({
           where: {
             statusPedido: {
               enumerador: {
@@ -113,10 +129,10 @@ class PedidoRepository implements IPedidoRepository{
             }
           }
         });
-        return pedido_response;
+        return pedidoResponse;
       } catch (error) {
         throw error;
-      };
+      }
     }
 
 }
