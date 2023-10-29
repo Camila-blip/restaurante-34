@@ -1,5 +1,6 @@
 import { IPedidoRepository } from "@/core/ports/IPedidoRepository";
 import { Pedido, PrismaClient } from "@prisma/client";
+import { stat } from "fs";
 
 class PedidoRepository implements IPedidoRepository{
     private prismaClient: PrismaClient;
@@ -112,7 +113,7 @@ class PedidoRepository implements IPedidoRepository{
           where: {
             statusPedido: {
               enumerador: {
-                startsWith: "Em"
+                startsWith: status
               }
             }
           },

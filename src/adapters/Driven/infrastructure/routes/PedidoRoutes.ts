@@ -50,7 +50,7 @@ class PedidoRoutes implements IpedidoRoutes {
         )
 
         .get(
-            `${this.BASE_URL}/pedido/status/fakecheckout`,
+            `${this.BASE_URL}/pedido/status/fakecheckout/:status`,
             this.pedidoController.getPedidoFakeCheckout.bind(this.pedidoController)
         )
 
