@@ -1,4 +1,5 @@
-import { Produto } from "@/core/domain/Entities/Produto";
+import { Produto } from "@prisma/client";
+
 
 export interface IProdutoUseCase {
     executeCreation(produtoData: Produto): Promise<Produto>;

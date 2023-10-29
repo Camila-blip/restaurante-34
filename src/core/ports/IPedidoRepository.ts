@@ -5,5 +5,6 @@ export interface IPedidoRepository {
     getPedidoById(id: number): Promise<Pedido>;
     getPedidos(): Promise<Pedido[]>;
     getPedidosByStatus(status: string): Promise<Pedido[]>;
+    getPedidoByStatusFakeCheckout(status: string): Promise<Pedido[]>;
     updatePedido(id: number, status: string): Promise<Pedido>;
 }

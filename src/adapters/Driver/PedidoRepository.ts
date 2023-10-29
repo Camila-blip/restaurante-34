@@ -112,7 +112,7 @@ class PedidoRepository implements IPedidoRepository{
           where: {
             statusPedido: {
               enumerador: {
-                equals: status
+                startsWith: "Em"
               }
             }
           },

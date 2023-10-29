@@ -11,9 +11,9 @@ import ProdutoController from "@/adapters/controllers/ProdutoController";
 import ClienteController from "@/adapters/controllers/ClienteController";
 import PedidoRepository from "@/adapters/Driver/PedidoRepository";
 import PedidoUseCase from "@/core/application/useCases/pedido/PedidoUseCase";
-import PedidoController from "@/adapters/controllers/PedidoController";
 import ProdutosDoPedido from "@/adapters/Driver/ProdutosDoPedido";
 import PedidoRoutes from "./PedidoRoutes";
+import PedidoController from "@/adapters/controllers/PedidoController";
 
 const BASE_URL = "/api";
 

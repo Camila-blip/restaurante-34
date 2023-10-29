@@ -10,5 +10,6 @@ export interface IPedidoUseCase{
   executeUpdatePedidoPreparacao(idPedido: number): any;
   executeUpdatePedidoPronto(idPedido: number): any;
   executeUpdatePedidoFinalizado(idPedido: number): any;
-  executeGePedidoByStatus(status: string): any;
+  executeGetPedidoByStatus(status: string): any;
+  executeGetPedidoFakeCheckout(status: string): any;
 }

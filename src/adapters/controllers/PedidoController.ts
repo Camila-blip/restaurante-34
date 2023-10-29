@@ -38,7 +38,7 @@ class PedidoController implements IPedidoController{
     const { status } = req.params;
 
     try{
-      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status);
+      const pedido = await this.pedidoUseCase.executeGetPedidoByStatus(status);
       return res.status(200).json({  pedido });
     }
     catch(error: any){
@@ -47,11 +47,11 @@ class PedidoController implements IPedidoController{
 
   }
 
-  async getPedidoByStatusFakeCheckout(req: Request, res: Response) {
-    const status = "Em preparação";
+  async getPedidoFakeCheckout(req: Request, res: Response) {
+    const { status } = req.params;
 
     try{
-      const pedido = await this.pedidoUseCase.executeGePedidoByStatus(status);
+      const pedido = await this.pedidoUseCase.executeGetPedidoFakeCheckout(status);
       return res.status(200).json({ pedido });
     }
     catch(error: any){

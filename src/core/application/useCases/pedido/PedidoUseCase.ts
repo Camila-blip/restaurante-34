@@ -76,9 +76,20 @@ class PedidoUseCase implements IPedidoUseCase {
     }
   }
 
-  async executeGePedidoByStatus(status: string) {
+  async executeGetPedidoByStatus(status: string) {
     try{
       const response = await this.pedidoRepository.getPedidosByStatus(status);
+
+      return response;
+    }
+    catch(error){
+      throw error;
+    }
+  }
+
+  async executeGetPedidoFakeCheckout(status: string) {
+    try{
+      const response = await this.pedidoRepository.getPedidoByStatusFakeCheckout(status);
 
       return response;
     }
