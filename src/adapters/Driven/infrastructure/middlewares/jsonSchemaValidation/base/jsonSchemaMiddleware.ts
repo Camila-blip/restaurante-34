@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import {JSONSchema4, validate} from "json-schema";
-import { IjsonSchemaMiddleware } from "./IjsonSchemaMiddleware";
+import { IJsonSchemaMiddleware } from "./IJsonSchemaMiddleware";
 
-class JsonSchemaMiddleware implements IjsonSchemaMiddleware{
+class JsonSchemaMiddleware implements IJsonSchemaMiddleware{
   private jsonSchema: JSONSchema4;
 
   constructor(schema: JSONSchema4) {

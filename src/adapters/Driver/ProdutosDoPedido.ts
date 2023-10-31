@@ -1,4 +1,4 @@
-import { Produto } from "@/core/domain/Entities/produto";
+import { Produto } from "@/core/domain/Entities/Produto";
 import { IProdutosDoPedidoRepository } from "@/core/ports/IProdutosDoPedidoRepository";
 import { PrismaClient } from "@prisma/client";
 

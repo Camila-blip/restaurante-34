@@ -1,20 +1,24 @@
-# Use a imagem oficial do Node.js como imagem base
-FROM node:16.13
 
-# Define o diretório de trabalho dentro do contêiner
-WORKDIR /usr/src/app
+FROM node:alpine
 
-# Copie o arquivo package.json e package-lock.json para o diretório de trabalho
+WORKDIR /app
+
 COPY package*.json ./
 
-# Instale as dependências do aplicativo
-RUN npm install
+COPY prisma ./prisma/
 
-# Copie todo o código-fonte do aplicativo para o contêiner
+COPY .env ./
+
+COPY tsconfig.json ./
+
 COPY . .
 
-# Exponha a porta em que o aplicativo estará em execução (substitua a porta apropriada)
-EXPOSE 3000
+RUN npm install
 
-# Comando para iniciar o aplicativo
-CMD [ "node", "public/server.js" ]
+# RUN npx prisma generate && npx prisma migrate dev --name init && npx prisma db seed
+# RUN npx prisma generate
+# RUN npx prisma migrate dev --name init
+
+EXPOSE 3001
+
+CMD ["npm", "run", "prisma:prepare"]
